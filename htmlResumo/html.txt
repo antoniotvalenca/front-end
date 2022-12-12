@@ -1,0 +1,109 @@
+HTML ESSENCIAIS
+
+#htmlessenciais
+
+BLOCK (pulam linhas quando fechadas):
+
+TITULOS:
+<h1></h1> , <h2></h2> (……) <h6></h6> —> TAGS PARA TEXTOS QUE VÃO SER MAIS DE TÍTULO, EM QUE H1 TEM MAIOR FONTE E H6 MENOR 
+
+TEXTO GENÉRICO:
+<p></p> —> PARÁGRAFO 
+
+TAG VAZIA PARA QUALQUER UTILIDADE:
+<div></div> 
+
+TAGS SEMANTICAS QUE MARCAM AREAS DO BODY:
+<main> ——> marca o conteudo principal do site. so usamos uma por site
+<nav> ——> para navegaçao do site (tipo a barra do menu etc. normalmente marcamos a tag nav com a aria-label=“nome”
+<section> ——> define uma regiao do site
+<article> ——> define uma regiao do site. qualquer artigo ou conteudo independente (que nao depende de nenhum outro do site			   	pode ser considerado nesta tag
+<aside> ——> marca o conteudo complementar do site
+<footer> ——> rodapé (parte de baixo de um site, ex: onde colocam aqueles icons de rede social)
+<header> ——> cabeçalho (diferente de head)
+obs: podemos usar o header e o footer para marcar dentro de articles o cabeçalho do artigo e o rodape dele. mas eles, nesse caso, possuem mais funçao semantica que util
+
+LISTAS DE COISAS (lista ao pe da letra)
+>>>> LISTAS SEM ORDEM NUMERICA ESPECIFICA
+
+<ul> </ul> -> marca a existencia de uma lista (a mais comum)
+	<li></li> -> colocamos cada item da lista dentro dessa tag
+
+(também podemos colocar listas dentro de listas) 
+
+<ul>
+	<li>Numero 1
+		<ul>
+			<li>Numero 1.1</li>
+			<li>Numero 1.2</li>
+		</ul>
+	<li>Numero 2</li>
+	<li>Numero 3</li>
+</ul>
+
+>>>> LISTAS COM ORDEM NUMERICA ESPECIFICA
+<ol></ol> -> mesma logica do de cima, inclusive usando o <li></li>
+
+>>>> LISTAS DE TERMO E DESCRIÇAO (EXEMPLO: PERGUNTAS E RESPOSTAS)
+<dl></dl> ——> para declarar a sua existência
+	<dt>PERGUNTA</dt> ——> Para dizer o “titulo” (t de termo)
+	<dd>TEXTO EXPLICANDO</dd> ——> 
+
+QUOTES BLOCK
+<blockquote cite=“LinkDeOndeVeioACitaçao”>
+	<p> Citaçao </p>
+</blockquote> 
+
+TABLE
+<table> -> marca a criaçao de uma tabela (organizaçao de linhas e colunas)
+<tr> -> “table row” representa uma linha da tabela
+<td> -> “table data” é o material conteudistico da table. colocamos ela dentro da <tr>
+<th> “table header” é o titulo do material conteudistico da table. ou seja, Savings seria o th e o valor por mes seria o td
+
+
+INLINE (respeitam o fluxo da linha mesmo quando fechadas):
+
+<a href=“/o2ijro”></a> —> LINKS INTERNOS OU EXTERNOS
+
+<span></span> —> O MESMO DE DIV MAS NÃO PULA LINHA
+
+<strong></strong> —> TEXTOS EM NEGRITO
+
+<em> —> serve para dar enfase a alguma coisa num texto (parecido com strong mas nao fica negrito)
+
+QUOTE INLINE
+
+<q cite=“www.oeijwfi.com”></q> ——> colocamos dentro do <p></p> para fazer um quoting curto entre aspas
+
+<cite></cite> ——> para citar uma obra especificamente (nome de um livro filme etc)
+
+INPUT
+<input type = *tipo*> -> permite ao usuario inputar algo de acordo com o type
+			-> types: text, file, checkbox
+			-> é uma tag que nao precisa ser fechada 
+
+<select onchange=“funcao(this)”>
+	<option value=“valor1” selected> valor1 </option>
+	<option value=“valor2” selected> valor2 </option>
+	<option value=“valor3” selected> valor3 </option>
+</select> -> vai colocar uma caixinha de opcoes (valor1 valor2 e valor3, e quando um deles for clicado a funçao funcao(this) vai ser ativada, em que this é o value dentro do javascript)
+
+<fieldset> -> indica que vai ser organizado um formulario de input (seja qual for o tipo)
+
+<fieldset>
+	<label> Date:
+		<input type=“date” min=“” max=“”>
+	</label>
+</fieldset> -> vai criar um datepicker pro usuario escolher uma data, em que o min=“yyyy-mm-dd” e o max=“yyyy-mm-dd” vai setar a data minima ou maxima (se necessario, nao obrigatorio)
+
+INLINE E BLOCK (que respeitam o fluxo da linha mas também tem seu próprio bloco)
+
+<img src alt /> SRC = CAMINHO PRA IMAGEM, ALT = TITULO DA IMAGEM
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<img scr=“./img/lobo.jpg” alt= “Foto de Lobo”/>     —> ADICIONA IMAGEM
+
+
+ESTILISTICOS:
+
+<hr size="1" width="100%" noshade /> -> a tag <hr> cria uma linha horizontal. o size é sua altura o width sua largura e o noshade indica que nao qeur nenhuma sombra 

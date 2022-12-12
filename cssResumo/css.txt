@@ -1,0 +1,273 @@
+CSS ESSENCIAIS
+
+#cssessenciais
+
+TAGS E CLASSES
+
+
+# tag {
+
+}
+
+.classe {
+
+}
+______________________________________________________________________________________________________________
+
+UNIDADES
+
+px -> pixels (ocupa uma área em pixels da tela)
+ft -> fração (ocupa a fraçao do espaço disponivel. quanto maior, mais da fraçao ocupa)
+rem -> unidade de medida que padroniza e deixa fluido a estrutura da tela. 1em=16px
+vw/vh -> usados respectivamente para valores de largura e altura. o valor maximo é 100 e diz respeito a ocupaçao da tela em porcentagem)
+
+
+
+
+______________________________________________________________________________________________________________
+  
+BACKGROUND
+
+background: lightblue; -> (só pode ser usado sozinho, sem os de baixo)
+background-color: lightblue -> mesmo do de cima, mas só diz respeito ao parametro BACKGROUND COLOR e pode ser usado com os de baixo)
+background-image: url(“./img/bicicleta.jpg”) -> imagem de fundo
+background-repeat: no-repeat; -> por padrao, quando definimos um background image, quanto mais expandimos a tela, a foto de tela fica se repeetindo infinitamente. portanto, dando a unidade no-repeat, quebramos esse padrão
+background-size: 100% -> regula o tamanho do background-image. podemos usar a unidade:
+					- pixels, %, contain(mantém a imagem ocupando o contain todo sem cortar), cover(a mais usada, mantem 						no container todo, mas cortando a medida que o usuario diminui a telav 
+background-position: center; -> define a posiçao da imagem do background
+______________________________________________________________________________________________________________
+
+
+
+COR
+
+background: black; -> fundo daquele box
+color: black; -> cor do texto
+______________________________________________________________________________________________________________
+
+PROFUNDIDADE DOS ELEMENTOS
+
+z-index: -1; -> define que aquele elemento fica abaixo dos outros (no caso de sobreposiçao de elementos isso fica aparente). por			 ter o parametro -1 ele fica abaixo de todos)
+
+______________________________________________________________________________________________________________
+
+POSITION (define a posiçao de um elemento na tela)
+
+position: fixed; -> fixa em uma posiçao da tela (mesmo se der scroll, vai continuar la)
+position: relative;  -> pega um elemento e reposiciona ele na tela (ex: quero que um elemento x fique 20px pra cima, declaro						    o position relative e o top: 20px)
+position: absolute; ->
+______________________________________________________________________________________________________________
+
+FUNÇAO REPEAT() - escreve um número X de vezes um parametro prestabelecido pelo programador pra evitar que ele escreva um codigo muito extenso
+
+grid-template-columns: repeat(20, 200px) -> esta dizendo que vão ser criadas 20 colunas com 200px cada
+
+______________________________________________________________________________________________________________
+
+TAMANHO E LIMITE E ARREDONDAMENTO
+
+width: 80px; -> ambos medem largura e altura das boxes
+height: 120x; ^
+
+padding: 20px; -> distancia entre conteudo e border (se existir border no caso)
+			-> obs: eu posso colocar tipo 20px 200px 20px 200px (cima direita baixo esquerda, ao inves de um so valor que				     represente todos)
+border: 10px solid #111; -> largura da borda, e seu estilo estetico e sua cor
+border-width: 30px 40px-> define as larguras top/bot e right/left da borda 
+margin: 30px -> margem da box (ou seja, a distancia que ela vai tomar de outras boxes)
+border-radius: 4px; -> arredonda borda
+gap: 10px -> o gap que vai existir entre os itens 
+
+______________________________________________________________________________________________________________
+
+TEXTO
+
+text-decoration: none; -> implica principalmente em elementos que carregam links internos ou externos, tirando aquela linha
+text-decoration: underline; -> autoexplicativo
+text-align: center; -> posiciona o texto em determinada parte da tela, no caso, no centro
+font-size: 10px; -> tamanho da fonte
+font-weight: normal; -> se a fonte é bold, se é normal, se é mais fina etc
+line-height: 1.3 -> define a distancia em altura entre as linhas
+letter-spacing: 10px -> espaçamento entre as letras
+______________________________________________________________________________________________________________
+
+DISPLAY
+
+display: none; -> aquele elemento é removido da página (mas para coloca-lo de volta so voltar no código e tirar essa opcão)
+display: inline; -> faz uma tag respeitar o fluxo da linha, se tornando inline (ou permanecendo kk)
+display: block; -> faz a tag inline se tornar block (e, portanto, podendo absorver sua capacidade de ter width/height etc, mas podendo, também, caso mal configurada, se meter no meio de outras boxes deixando o browser poluido)
+display: inline-block; -> é possivel, a partir dessa tag, pegar um elemento inline (que nao seria possivel alterar sua width height margin etc) e adicionar esses elementos, fazendo com que, mesmo ela dentro de uma box, ela tenha uma box propria.
+
+______________________________________________________________________________________________________________
+
+HERANÇA
+color: inherit; -> herda uma característica da tag mãe, ignorando os padrões prestabelecidos que bloqueavam essa herança
+
+______________________________________________________________________________________________________________
+
+
+PARA MANIPULAR IMAGENS:
+
+max-width: 100% -> muito usado associado a tag <img> fazendo com que a imagem se ajuste de acordo com a tela em que esta (sem ser cortada ou distorcida ou perder resoluçao). bom para grids, para nao ultrapassar o seu limite estabelecido
+width: 400px -> o width controla o tamanho da imagem na tela, caso seja o caso de querer
+width: 100% -> uma fusão do maxwidth e width em que a imagem vai sempre atingir o tamanho maximo na tela, independente se nao foi feito para esse formato.
+display: none; -> deixa a imagem “apagada”(invisivel e sem atrapalhar a dinamica do site)
+
+object-fit: cover; -> faz com que a imagem, a medida que a tela for encolhida, ao inves de diminuir de tamanho, é cortada
+			——> obs: usar com height de 100%;
+object-position: top right; -> vai definir a partir de que cantos a imagem vai ser cortada. no caso, vai ser cortada no topo e na direita
+______________________________________________________________________________________________________________
+
+BOX MODEL:
+
+display: block; -> tira o espaçamento entre as imagens
+display: inline block; -> cria um box mas que respeita o fluxo da linha
+
+______________________________________________________________________________________________________________
+
+FLEX BOX (uma grid primitiva, que nao trabalha com linhas e colunas e só linhas, mas que vao se organizando em colunas a medida que vao se acomulando [passando pra próxima linha] )
+
+display: flex; -> starta o flexbox
+flex-wrap: wrap; -> comando que manda o flexbox, caso nao tenha espaço suficiente, pular pra prox linha ao inves de							   quebrar o texto
+gap: 10px; -> da o gap entre as boxes
+
+justify-content: center; -> posiciona do jeito que quer na tela (mas se tiver com o flex: 1; nao funciona, pois estará ocuppando todos os espaços em branco da tela, entao nao vai dar pra centralizar)
+
+flex: 1; ->manipulaçao de tamanho/espaço em branco (no caso do 1 é o padrao)
+
+
+
+______________________________________________________________________________________________________________
+
+GRID:
+
+display: grid; -> declara a existencia de um grid 
+gap: 20px 20px; -> cria uma margem que separa as colunas. O Primeiro pixel é para a horizontal e o segundo para a vertical
+max-width: 1000px -> define o tamanho do grid
+1)	TAMANHO COLUNAS LINHAS
+
+grid-template-columns: 200px 200px 200px -> quantas colunas e a largura de cada (nesse caso 3 colunas de 200px cada)
+			——> parametros:
+					1fr -> toma uma proporçao de fraçao e se ajusta de acordo com a fraçao que aquele elemento representa
+					auto -> fica automatico pra se expandir o maximo possivel (podemos combinar valores com auto para que					, por exemplo, o elemento dos lados ocupem um espaço de 80 px e o do meio [dito como auto] ocupe o						resto). o auto tambem ocupa exatamente o tamanho de um item, caso seja o caso
+					20px -> pixels
+					repeat(auto-fit), minmax(150px, auto)) -> o autofit vai dizer que quantos elementos puder encaixar um ao 					lado do outro ele vai encaixar e o minmax vai dizer o valor minimo e o valor maximo que aquele item pode
+					ocupar (vai se ajustando a medida que a tela encolhe e expande, mas so pode tomar aquele minimo ou 						aquele maximo prestabelecido)
+
+grid-template-rows: 200px 200px 200px -> quantas linhas e os seus tamanhos (no caso 3 linhas de 200px cada)
+grid-column: 1 / 3; (decido em que coluna aquele elemento vai ficar especificamente. se eu colocar um numero x / y estou dizendo que ele vai da coluna x ate a y [lembrando que o y sempre vai ser adicionado o valor 1]) ou podemos dizer 1/-1 em que -1 é o ultimo
+
+2)	ORGANIZAÇÃO GENERALIZADA DOS GRIDS (ou seja a posiçao que o grid geral toma na tela)
+
+align-content: center; -> centraliza o grid verticalmente
+justify-content: center; -> centraliza horizontalmente
+place-content: center center -> junçao dos dois acima
+			——-> paramentros:
+					start (canto esquerdo superior)
+					center
+					end (canto direito inferior)
+					
+
+3)	ORGANIZAÇÃO IDE ITENS ENTRE LINHAS E COLUNAS
+
+align-items -> alinha um ao lado do outro baseado nos itens ao lado
+justify-items -> alinha um abaixo do outro baseado nos itens debaixo e de cima
+place-items -> os dois ao mesmo tempo baseado nos itens ao lado
+		——-> paramentros:
+					start (cima)
+					center (centro em comparacao ao item ao lado e/ou abaixo)
+					end (baixo)
+
+4)	ORGANIZAÇÃO INDIVIDUAL DE ITENS (INDEPENDENTE DE LINHAS E COLUNAS
+
+align-self -> alinha horizontalmente
+justify-self -> alinha verticalmente
+place-self-> os dois ao mesmo tempo
+		—> mesmos parametros dos de cima
+
+
+grid-row:  2; -> indica que linha aquele elemento vai ficar espeficiamente
+grid-column: 3 -> indica que coluna aquele elemento vai ficar especificamente
+			——> parametros: 
+					2 (só um numero) : valor direto àquele associado
+					1 / 3 : indica que aquele elemento vai daquela coluna 1 até a coluna 2 (2 colunas possuem 3 linhas e esses 					valores especificamente se referem as linhas colunares)
+					1/-1 : o -1 indica que é ate o fim	
+
+______________________________________________________________________________________________________________
+
+PSEUDOCLASSES 
+
+-> adicionam um estado especial para um elemento em função de como o usuário interage por ele.
+-> ex: existe uma pseudoclasse que faz com que quando o mouse fiquqe por cima de um elemento (um botao por exemplo) ele mude de cor para indicar visualmente ao usuario que ali é clicável
+
+:hover -> quando passar o mouse para cima
+:active -> para quando se clica no elemento
+:focus -> quando apertamos tab no site e ele vai navegando pelos elementos (podemos mudar a cor do fundo por ex quando o tab 		é tocado, mas é bom evitar mexer nesse pq o padrão é receber um outline já
+:visited -> mais usado para link (quando um link já foi visitado por ex, aquele texto muda a cor para indicar que vc ja visitou). em 		compensaçao, qnd usamos esse acompanhado das pseudoclasses de cima, uma vez que vc ja visitou o link, todas as 			outras pseudoclasses ficam desativadas e só o que foi definido pelo visited fica ativado
+:root -> é o mesmo que se referir a tag html. ou seja, quando vamos criar alguma coisa global da estilizaçao, podemos dizer :root{*codigo css*, como criar variaveis etc}
+
+
+ex:
+a{
+transition: 0.3s;
+}
+a:hover {
+ ….
+}
+______________________________________________________________________________________________________________
+
+PSEUDOELEMENTS
+
+São elementos de texto que colocamos no css mas que nao possuem função informativa nenhuma, apenas estética.
+EX: um tracinho vermelho embaixo de um texto. Para fazermos isso usamos o ::before ou ::after na declaraçao da tag no css
+
+
+::before —> o conteudo de texto css vem antes do conteudo de texto html
+::after —> o conteudo de texto css vem depois do contexto de texto html
+
+HTML:
+
+<p> Nossos Produtos </p>
+
+CSS:
+
+p::after {
+	display: block -> PARA PULAR A LINHA
+	content: “ “; -> o “content” é o texto que voce quer colocar
+	width: 40px;
+	height: 4px;  -> para dar o tamanho do tracinho colorido
+	background: purple;
+
+}
+
+
+______________________________________________________________________________________________________________
+
+DESIGN RESPONSIVO @MEDIA
+
+@media -> serve para especificar um tipo de estilo para cada tipo de midia diferente
+
+		@media (max-width 500px) {
+			*realizamos as mudanças levando em conta uma tela com um máximo de 500px de largura*
+			div{
+				grid-template-columns: 1fr;
+			}
+		}
+
+		OU
+
+		@media (min-width 600px) [ 
+ 			*…*
+		}
+
+
+		@media (min-width: 800px) and (max-width: 900px){
+
+				*…*
+		}
+
+
+parametro auto-fit -> é um parametro muito usado na criaçao de colunas e linhas que faz com espaços em branco (independente da largura da tela) sejam sempre excluidos a medida que novas colunas sao automaticamente adicionadas (ex: a tela eh expandida e novas colunas sao criadas e os elementos vao se arrastando para a coluna criada etc)
+
+margin: 0 auto; -> para centralizar o grid na tela (alem do place-content) quando a tela for expandida (podemos também mudar o valor de 0 apra outro caso queiramos um espaço no top/bottom
+
+word-break: break-all; -> a medida que a tela encolhe, as palavras vao quebrando
