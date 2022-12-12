@@ -1,0 +1,6 @@
+Nem todos os browsers possuem a mesma compatibilidade com o código javascript que você ta escrevendo
+    -> Isso porquê alguns demoram para atualizar ou porquê alguns usuários insistem em usar versões desatualizadas
+
+Podemos checar compatibilidade do código vs. browser usando as ferramentas:
+    -> caniuse.com (indica quais browsers são compatíveis com alguns aspectos do código (funçoes variaveis metodos propriedades etc))
+    -> babeljs.io (é um transpilador que, de acordo com os seus presets, ele irá traduzir o seu código para a versão tão antiga quanto você deseja)

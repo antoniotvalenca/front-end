@@ -1,0 +1,204 @@
+PRINT
+
+console.log(" ") -> print do python
+_____________________________________________________________
+NUMBER
+obs: problema em numeros float -> numeros de ponto flutuantes que não possuem parte inteira (0.000(...)1->0.99999999(...)) sao armazenados no JS como numeros binarios, entao, as vezes, em calculos, eles saem com um errinho minimo (0.7+0.1 = 0.79999999).
+            -> para consertar. precisa associar a operaçao ao método .toFixed(), para regular o numero de casas decimais e arredondar, e depois ao .parseFloat() para transformar de string para numero de volta. OU, ao inves de parteFloat() colocar tudo dentro de Number();
+
+            ex:
+
+            let num1 = 0.1;
+            let num2 = 0.7;
+
+            console.log(parseFloat((num1+num2).toFixed(2)));
+            ou
+            console.log(Number((num1+num2).toFixed(2));
+
+Number.isNaN(x) -> checa se é NaN
+Number.isInteger(x) -> checa se é inteiro
+Math.floor(x) -> arredonda pra baixo
+Math.ceil(x) -> arredonda pra cima
+Math.round(x) -> arredonda pra baixo ou para cima dependendo do valor (para o mais prox)
+Math.max(x,y,z,w,a,b,c) -> vai retornar o maior valor da sequencia de numeros(bom para trablhar c vetores)
+Math.min(x,y,z,a,b,c) -> mesmo do de cima, mas retorna o minimo
+Math.random() -> gera um numero aleatorio entre 0 e 1 com varias casas decimais
+        (Math.random() * (10 - 5) + 5); -> gera um numero entre 10 e 5
+Math.pow(2,5) -> eleva o primeiro ao segundo numero
+parseInt(x); -> transforma uma variavel string em int
+parseFloat(y) -> transforma uma variavel string em float
+x.toFixed(2) -> regula o numero de casa decimais de um numero (nesse caso tou indicando 2 casas)
+x.replace('.', ';') -> troca um valor por outro (no caso, tudo que for '.' na string ira se tornar um ';')
+        x.replace(/\D+/g, '') -> a expressaao /\D+/g representa tudo que NÃO É NÚMERO. entao, nesse caso, tudo que não
+                                é numero, irá ser substituido por um valor nulo. bom para limpar codigos numericos que
+                                foram inseridos como string (tipo um cpf que vem com pontos e traço)
+~~x -> da um parseInt de um jeito mais simples. se for numero float, vira int. se for string numerica, vira numero normal int(etc)
+_____________________________________________________________
+
+
+VARIAVEIS
+
+typeof x -> tipo da variável em questão (string, numero, null, objeto, etc)
+_____________________________________________________________
+
+STRING
+x.toString() -> transforma um number em string
+x.toString(2) -> transforma um número em binário e dps em string
+x.toLowerCase(); -> coloca tudo minusculo
+x.charAt(2); -> vai mostrar o caractere daquele index
+x.toString(); -> transforma uma variavel numérica em string
+x.endsWith('a') -> retorna se uma string termina com o que voce estabelecer (no caso, a letra a)
+var x = "antonio";
+x.replace("tonio", "tonia"); // troca um pedaço da string (tonio) por outra (tonia)
+x.substr(1, 2) -> um "slice" que pega os indices 1 e 2
+x.substr(2) -> pega do 2 em diante
+x.includes("palavra") -> vai checa se, dentro do x (seja um array ou string etc), existem as letras do "palavras".
+_____________________________________________________________
+
+ARRAY
+variavel.split(" "); -> cria uma array, splitando uma variavel em varios pedaços
+vetor.unshift('palavra') -> cria um item e adiciona no começo da array
+vetor.push("palavra"); -> cria um item e adiciona no fim da array
+vetor.shift(); -> remove o primeiro item
+vetor.pop(); -> remove o ultimo item
+vetor.lenght; -> calcula quantos itens tem aquela array
+vetor.slice(0, 5) // vai se referir do indice 0 ao 4 (o 5 é ignorado)
+x instance of vetor; // checa se x está no vetor
+vetor.join(" "); -> o oposto de split(), junta todos os itens de uma array em uma string, o elemento que irá as separar seria o que fica entre as aspas do ()
+vetor.splice(indice, quantidade, elementonovo1, elementonovo2, ...); -> a partir do indice indicado pelo programador, irá apagar uma quantidade x de itens (também determinada pelo programador no segundo parametro) e os novos elementos que serao adicionados a partir daquele indice
+Array.from(x) -> torna x uma array, em que cada indice é um valor
+_____________________________________________________________
+
+ALEATORIOS
+
+vetor.join(" "); -> o oposto de split(), junta todos os itens de uma array em uma string, o elemento que irá as separar seria o que fica entre as aspas do ()
+x.lenght -> calcula o tamanho (string, array...)
+x.split(" ") -> pega uma string e transforma ela numa array. cada indice será definido pelo elemento separador que fica entre parenteses (no caso, é o espaço. entao, cada vez que tiver um espaço na string, irá indicar a separação entre um indice e outro)
+x.sort() -> coloca em ordem numerica/alfabetica um array
+_____________________________________________________________
+
+DATE (OBJETO)
+
+const data = new Date();
+console.log(data.toString());
+        -> Mon Oct 04 2022 15:27:56 GMT-0300 (GMT-03:00)
+
+-> Formas de trabalhar com o DATE:
+
+new Date(); -> data normal de hoje
+
+new Date(2019, 3, 20, 15, 14, 20);
+         ano  mes dia h. min. seg. -> nesse caso o mes vai do 0->11
+
+new Date('2019-04-20 20:20:59') -> nesse caso o mes é normal
+
+-> Dar Get em um parametro especifico do Date()
+const data = new Date();
+console.log(data.getDate()); -> getDate() pega o dia
+console.log(data.getMonth()); -> getMonth() pega o mes (dar o +1 para igualar o valor do mes)
+console.log(data.getFullYear()); -> getFullYear() pega o ano
+console.log(data.getHours()); -> getHours() pega a hora
+console.log(data.getMinutes()); -> getMinutes() pega o minuto
+console.log(data.getSeconds()); -> getSeconds() pega o segundo
+console.log(data.getDay()); -> getDay() pega o numero do dia da semana
+
+-> Conseguir as informações de horas do pt-br
+
+                let data = new Date();
+                return data.toLocaleTimeString('pt-BR')
+
+OU
+
+                return data.toLocaleTimeString('pt-BR, {
+                        hour12: false // isso tira a dinamica de A.M. e P.M.
+                })
+
+-> Calcular a diferença de dias entre duas datas (no formato ano - mes - dia)
+
+                function myFunction(a, b){
+                if(a.getDate()>b.getDate()){
+                        return Math.abs((a - b) / (1000*60*60*24));
+                } else {
+                        return Math.abs((b - a) / (1000*60*60*24));
+                }
+                }
+
+                console.log(myFunction(new Date('2020-06-11'), new Date('2020-06-01')))
+_____________________________________________________________
+
+SETINTERVAL(FUNÇAO, MILESIMO) / CLEARINTERVAL(VARIAVEL) / SETTIMEOUT(FUNCAO, MILESIMO)
+
+-> setInterval(funçao, milesimo) (vai realizar uma funçao infinitamente entre um determinado intervalo em milesimos de segundos{1000 = 1segundo})
+-> setTimeOut(funcao, milesimo) vai realizar uma funçao após um determinado tempo estabelecido em milesimos de segundos
+-> clearInterval(variavel) -> é uma funçao que recebe a variavel que guarda o setInterval. Se ela for usada dentro do setTimeOut ela para o setInterval
+depois de um determinado tempo estabelecido no setTimeOut
+
+-> São funçoes, tanto do node.js quanto do browser. A primeira executa funçoes infinitamente em um determinado intervalo de tempo (em mili) predeterminado pelo programador. A segunda recebe a variavel que guarda o setInterval e para ela. A terceira recebe a funçao que printa
+
+
+        -> setInterval(oQueSeráPrintado, milésimoDeSegundos);
+
+                // Funçao que retorna a hora do PT-BR
+
+                function mostraHora() {
+                const data = new Date();
+
+                return data.toLocaleTimeString('pt-BR', {
+                        hour12: false
+                });
+                }
+
+                //  Funçao que printa essa hora
+
+                function printaHora() {
+                        console.log(mostraHora());
+                }
+
+                // Há cada 1000 milésimos de segundos (=1segundo) vai printar a hora
+
+                const x = setInterval(printaHora, 1000); (obs: nao precisa colocar numa variavel, mas é bom pra ter controle depois do setInterval. se so codar sem a variavel roda do mesmo jeito)
+
+        -> clearInterval(variavelQueGuardaOPrintaHora);
+
+                // Funçao que vai guardar o clearInterval, que será usado de parametro no setTimeout() para parar o setInterval()
+
+                function pararHora{
+                        clearInterval(x);
+                }
+
+        -> setTimeout(funçaoComClearInterval, milesimosdeSegundosQueVaiDemorarParaSerAcionada)
+
+                setTimeout(pararHora, 5000); (depois de 5 segundos, será parado o relógio)
+
+
+
+_____________________________________________________________
+
+BREAK E CONTINUE
+
+continue -> ao ser usado, o resto do laço é pulado e começa a proxima iteraçao
+break -> ao ser usado,  ele quebra todo o loop
+
+_____________________________________________________________
+
+OBJETO
+
+- Object.assign(aondeSeraEnviado, lugarDeOndeSeraEnviado) -> copia dados de um objeto para outro objeto
+            ex:
+            const teste1 = {a: 1, b: 2};
+            const teste2 = {b: 5, c: 6, d: 7};
+            const teste3 = Object.assign(teste1, teste2)
+            console.log(teste3); // {a:1, b:5, c: 6, d: 7} no caso da chave "b", o "b" do teste2 esta sobescrevendo o "b" do teste1
+
+- Object.keys(x) -> mostra as chaves do objeto
+- Object.values(x) -> mostra os valores das chaves
+- Object.entries(x) -> mostra as chaves e os valores, mas dividindo eles em arrays
+- Object.freeze(x) -> impede de alterar os valores de um objeto
+- Object.getOwnPropertyDescriptor(nomeDoObjeto, "nomeDaPropriedade") -> revela as suas configuraçoes (se é enumerable, writable, seu value etc)
+- *dentro de um objeto* get nomeCompleto() {return `${this.nome} ${this.sobrenome}`}; -> permite que acessemos esse metodo como propriedade (pessoa.nomeCompleto ao inves de pessoa.nomeCompleto(). Mas agora ela so é visivel se chamarmos ela diretamente por seu endereço)
+- *dentro de um objeto* set nomeCompleto(value){const parts = value.split(' '); this.nome = parts[0]; this.sobrenome = parts[1];} -> agora podemos alterar o seu valor fora do objeto. ex: nomeCompleto = "antonio valença" mesmo sendo um quote unquote metodo
+
+
+
+7  0 9  7  3  8  4  4  4 
+70 0 72 49 18 40 16 12 8 = 285 -> 

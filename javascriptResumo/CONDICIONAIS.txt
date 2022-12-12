@@ -1,0 +1,111 @@
+IF/ ELSE IF/ ELSE
+
+if(condição){
+    *ação*;
+} else if (condição){
+    *ação*;
+} else {
+    *ação*;
+}
+
+JEITO ALTERNATIVO (VARIAVEL)
+
+const estouFeliz = "sim";
+const felicidade = estouFeliz === "sim" ? true : false;
+
+
+JEITO ALTERNATIVO (RETORNO DE RESULTADO)
+
+const numero = 2;
+
+if(2%2==0) return console.log("divisivel por 2);
+__________________________________________________________________
+
+SWITCH CASE BREAK DEFAULT
+
+switch (variavel) {
+    case 'azul':
+        console.log("olhe para o céu");
+        break;
+    case "vermleho":
+        console.log("olhe para o fogo");
+        break;
+    case "verde":
+        console.log("olhe para a grama");
+        break;
+    default:
+        console.log("voce nao escolheu uma cor rgb");
+}
+__________________________________________________________________
+
+
+FOR (CONDIÇAO) -> Arrays, Matrizes e Strings
+
+for(let i = 0 ; i<10 ; i++){
+    console.log(i);
+}
+
+obs: posso usar o if->else dentro de um for loop, e depois usar um break; dentro do if->else para parar o loop se alguma coisa específica acontecer que me faça querer parar ele
+
+__________________________________________________________________
+
+FOR(IN) -> Arrays e Objetos
+
+const frutas = ["maça", "uva", "melancia"];
+for(let i in frutas) {
+    console.log(frutas[i]);
+}
+
+obs: o for(in) le os indices ou chaves do objetos
+
+const pessoa = {
+    nome: 'Luiz',
+    sobrenome: 'Otávio',
+    idade: 20,
+}
+
+for(let i in pessoa){
+    console.log(i, pessoa[i])
+}
+__________________________________________________________________
+
+FOR(OF) -> ITERÁVEIS, ARRAYS OU STRINGS
+
+const cidades = ["Paris", "Milão", "Recife"];
+
+for(let i of cidades){
+    console.log(i)
+} -> vai printar os valores "Paris", "Milão" e "Recife"
+
+__________________________________________________________________
+
+WHILE
+
+let i = 0;
+
+while(i<10){
+    console.log(i);
+    i++;
+}
+
+
+ou
+
+
+do{
+    console.log(i);
+} while (i<10); // a diferença é que no segundo caso, o looping vai acontecer pelo menos uma vez.
+
+__________________________________________________________________
+
+OPERADOR TERNÁRIO
+-> usamos quando queremos, de acordo com o valor que um usuário atribuir a uma variável, indicar se é verdadeiro ou falso. como se fosse um if else mas direto na declaraçao da variável
+
+var idade = 19;
+var podeBeber = (idade>=18) ? "Pode beber" : "Não pode beber";
+console.log(podeBeber);
+
+var VARIÁVEL = (condição) ? "O que diz se for TRUE" : "O que diz se for FALSE";
+console.log(V)
+
+__________________________________________________________________

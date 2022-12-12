@@ -1,0 +1,181 @@
+FÁBRICA DE OBJETOS (FACTORY FUNCTIONS)
+
+        function criaPessoa(nome, sobrenome, idade){
+            return{
+                nome: nome,
+                sobrenome: sobrenome,
+                idade: idade
+            };
+        }
+
+        const pessoa1 = criaPessoa('Luiz', 'Otávio', 25);
+
+__________________________________________________________________
+
+CONSTRUCTOR FUNCTIONS
+
+        function Pessoa(nome, sobrenome){ //obs: para constructor functions usamos letra maiuscula
+            this.nome = nome;
+            this.sobrenome = sobrenome
+            this.nomeCompleto = () => this.nome + ' ' + this.sobrenome;
+        }
+
+        const pessoa1 = new Pessoa('luiz', 'oliveira');
+        const pessoa1 = new Pessoa('maria', 'valença');
+
+__________________________________________________________________
+
+
+COLOCAR O VALOR DA PROPRIEDADE DE UM OBJETO DENTRO DE UMA VARIAVEL ALEATORIA DE FORA DO OBJETO
+
+const {nome, sobrenome} = pessoa;
+
+__________________________________________________________________
+
+DEFINIR UMA NOVA PROPRIEDADE DE UM OBJETO, EDITANDO SUAS QUALIDADES (SE É VISÍVEL, SE NÃO É, SE É REESCREVÍVEL ETC) 
+
+-> OBJECT.DEFINEPROPERTY()
+        const pessoa1 = {
+            nome: 'antonio',
+            sobrenome: 'valença',
+            idade: 21,
+        }
+        Object.defineProperty(pessoa1, 'sexualidade', {
+            value: "gay", // define o valor dessa propriedade (number, string etc)
+            enumerable: true, // controla se é visivel ou invisivel
+            writable: false, // se o valor pode ser alterado ou nao depois
+            configurable: false // controla se podemos mais tarde redeclarar o defineproperty com esses mesmos parametros e reconfiguralos (ex:
+                                // se eu quiser mudar o atributo "writable" redeclarando no codigo. por exemplo, nao podemos apagar pessoa1.sexualidade)
+        });
+
+-> OBJECT.DEFINEPROPERTIES()
+        Object.defineProperties(pessoa1, {
+            nome: {enumerable: true}
+            cidade: {value: 'recife',
+                     writable: true}
+            estado: {value: 'pernambuco',
+                     writable: true}
+        });
+
+-> GET E SET
+            get -> acessa métodos como se fossem propriedades. Quando usamos um get, para acessar aquela propriedade, precisamos chamá-la diretamente
+            (ex: pessoa.nome)
+            set -> permite que o get do método (que se torna automaticamente um apropriedade) seja reescrevivel. Ou seja, é como se pudessemos escrever por cima de um método
+
+            EX:
+
+            const pessoa = {
+                nome: "antonio",
+                sobrenome: "valença",
+
+                get nomeCompleto() {
+                    return `${nome} ${sobrenome}`; // AGORA PODEMOS ACESSÁ-LO COMO PROPRIEDADE (pessoa.nomeCompleto)
+                }
+
+                set nomeCompleto(value) {
+                    const parts = value.split(' ');
+                    this.nome = parts[0];
+                    this.sobrenome = parts[1];
+                }
+            };
+
+            pessoa.nomeCompleto = "Antonio Valença"; // graças ao set podemos manipular seu valor
+            console.log(pessoa.nomeCompleto); // graças ao get podemos acessar o método como se fosse propriedade
+
+__________________________________________________________________
+
+MÉTODOS ÚTEIS
+
+- ...spread operator {...nomeDoObjeto} -> transfere os dados de um objeto para outra variavel mas sem linkar os dois. ou seja, se mudarmos um o outro nao sera influenciado. usar o rest operator tb permite mudar outras coisas, além de transferir os dados
+            ex:
+            const produto = {nome: "caneca", valor: 1.8};
+            const novoProduto = {...produto, material: "porcelana"};
+
+- Object.assign(aondeSeraEnviado, lugarDeOndeSeraEnviado) -> copia dados de um objeto para outro objeto
+            ex:
+            const teste1 = {a: 1, b: 2};
+            const teste2 = {b: 5, c: 6, d: 7};
+            const teste3 = Object.assign(teste1, teste2)
+            console.log(teste3); // {a:1, b:5, c: 6, d: 7} no caso da chave "b", o "b" do teste2 esta sobescrevendo o "b" do teste1
+
+- Object.keys(x) -> mostra as chaves do objeto
+
+- Object.values(x) -> mostra os valores das chaves
+
+- Object.entries(x) -> mostra as chaves e os valores, mas dividindo eles em arrays
+
+- Object.freeze(x) -> impede de alterar os valores de um objeto
+
+- Object.getOwnPropertyDescriptor(nomeDoObjeto, "nomeDaPropriedade") -> revela as suas configuraçoes (se é enumerable, writable, seu value etc)
+
+_____________________________________________________________
+
+PROTOTYPE
+-> Contextualização: Ao criarmos factory ou construction functions, quando vamos criando as instancias dessas funçoes modeladoras, mais informaçao é armazenada no computador-cliente. Num ponto de vista amplo, quanto mais usamos ela, a tendencia é aumentar a lentidao do computador e a sua performance etc.
+-> Existe um tipo de propriedade prototype, chamada __proto__ que ela armazena, por exemplo, um método que foi indicado para armazenar e ela fica no Objeto pai. portanto, para nao armazenar toda a sua atividade dentro da instancia, apenas chamamos esse __proto__ quando formos usar informaçoes dele.
+-> É como se existisse uma nuvem prototype que guardasse tudo
+-> Nomedafunçao.prototype.novavariavel = valor;
+
+EX:
+
+            function Pessoa(nome, sobrenome){
+                this.nome = nome,
+                this.sobrenome = sobrenome,
+                this.nomeCompleto = () => this.nome + ' ' + this.sobrenome;
+            }
+
+            const pessoa1 = new Pessoa("Antonio", "Valença"); // vai criar o objeto
+            console.log(pessoa1.mensagem) // vai mostrar como undefined
+
+            Pessoa.prototype.mensagem = "Isto é uma mensagem";
+            console.log(pessoa1.mensagem) // vai mostrar "Isto é uma mensagem" como uma propriedade (inclusive de qualquer nova instancia desse objeto)
+
+IMPORTANTE USARMOS O PROTOTYPE COM MÉTODOS ACIMA DE PROPRIEDADES( já que consomem mais memória/energia )
+
+            Pessoa.prototype.nomeCompleto = function() {
+                return this.nome + ' ' + this.sobrenome
+            }
+
+LINKANDO PROTOTYPES
+
+-> Object.setPrototypeOf(objetofilho, objetopai) agora o "objetofilho" pode acessar o "objetopai" como prototipo (seus metodos propriedades etc)
+
+            const objA = {
+                chaveA: 'A'
+            };
+
+            const objB = {
+                chaveB: 'B'
+            };
+
+            Object.setPrototypeOf(objB, objA); // agora objB acessa as propriedades e metodos do objA sem armazena-los em sua propria memoria
+
+-> também podemos fazer (mais recomendado):
+objB.prototype = Object.create(objA.prototype)
+    -> OBS: Quando usamos isso, salvamos a configuraçao, tambem, de que o objB foi criado pela funçao construtora do objA (no caso do exemplo acima, nenhum ta sendo criado por nenhuma funçao construtora, mas vamo fingir que sim). Portnato, pra consertar esse detalhe (que pode vir a ser importante no futuro, checando a origem de um objeto, usamos:
+    objB.prototype.constructor = ObjetoB;// ObjetoB seria o nome da funçao construtora de objB
+_____________________________________________________________
+
+HERANÇA
+-> É parecido com o conceito de classes. Um objeto vai herdando o outro, levando em conta que seria uma subcategoria dele.
+-> EX:  Temos a funçao construtora de produto;
+        Temos a funçao construtora de camiseta que tem suas proprias caracteristicas além daquilo que ela herda de produto, já que é uma subcategoria de produto.
+-> Para isso, chamamos a funçao construtora dentro de outra através do método .call
+
+
+            function Produto(nome, preco){
+                this.nome= nome;
+                this.preco= preco;
+            }
+
+            function Camiseta(nome, preco, cor){
+                Produto.call(t  his, nome, preco);
+                this.cor = cor;
+            }
+
+-> OBS: quando usamos funçoes construtoras, as vezes, usando o call e linkando prototipo, o javascript acha que uma subcategoria é criada pela funçao construtora da categoria acima. para consertar isso, so precisamos fazer:
+            Camiseta.prototype.constructor = Camiseta;
+
+_____________________________________________________________
+
+POLIMORFISMO

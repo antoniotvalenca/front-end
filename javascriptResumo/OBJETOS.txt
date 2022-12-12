@@ -1,0 +1,133 @@
+
+OBJETOS
+
+CRIANDO UM OBJETO
+
+        const pessoa1 = new Object(); // declarando a existencia de um objeto
+        pessoa1.nome = 'Antonio';  // atribuindo propriedade ao objeto
+        pessoa1.falarNome = function(){
+            console.log(`${this.nome} está falando o seu nome`)
+        }
+
+        OU
+
+        const pessoa2 = {
+            nome: 'Antonio',
+            idade: 21,
+
+            a  noNascimento(){
+                const dataAtual = new Date();
+                return dataAtual.getFullYear() - this.idade;
+            }
+        };
+__________________________________________________________________
+
+PROPRIEDADES (CHAVE: VALOR)
+
+        var pessoa = {
+            nome: "antonio",
+            idade: 21,
+        }
+
+        console.log(pessoa.nome); // vai printar o nome
+        console.log(pessoa['nome']) // mesma coisa do de cima, mas de outro jeito
+
+-------> para adicionar uma num objeto que já existe
+
+pessoa.altura = 14;
+
+__________________________________________________________________
+
+PARA VER TODAS AS PROPRIEDADES (CHAVES)
+        const pessoa1 = {
+            nome: 'antonio',
+            sobrenome: 'valeença',
+            idade: 21
+        }
+        for(let chave in pessoa1){
+            console.log(chave) // printa a chave
+            console.log(pessoa1[chave]) // printa o valor
+        }
+__________________________________________________________________
+
+MÉTODOS (FUNÇÕES(){ })
+
+        var antonio = {
+            totalSalario: 1500,
+            totalHoras: 120,
+            SalarioPorHora: 12.5,
+
+            salario(horasCompletas){ //método
+                return antonio.salarioPorHora*horasCompletas // obs: também podemos nos referir ao próprio objeto como THIS (no caso seria this.salarioPorHora). melhor pois o nome do objeto pode mudar
+            }
+        }
+__________________________________________________________________
+
+EXCLUINDO METODOS/PROPRIEDADES DO OBJETO
+
+const pessoa1 = {
+    nome: 'antonio',
+    sobrenome: 'valença'
+};
+
+delete pessoa1.nome;
+__________________________________________________________________
+
+
+MÉTODOS USANDO O Get
+
+        const pessoa = {
+            nome: "antonio",
+            sobrenome: "valenca",
+
+            get nomeCompleto(){
+                return `${this.nome} ${this.sobrenome}`;
+            }
+        }
+
+console.log(pessoa.nomeCompleto); // nesse caso nao precisamos usar o () depois do nomeCompleto pq o "get" transforma o método em propriedade
+
+__________________________________________________________________
+
+-------> para adicionar uma num objeto que já existe:
+
+antonio.trabalhou = function(resp){
+    if(resp=="sim"){
+        console.log("antonio trabalhou hoje.");
+    } else {
+        console.log("antonio nao trabalhou hoje.");
+    }
+    return;
+}
+__________________________________________________________________
+
+-> Para checar se uma propriedade foi diretamente criada naquele objeto, usamos o método hasOwnProperty
+
+ex:
+
+var menu = {
+    color: "white",
+    width: "45.5px"
+}
+
+menu.hasOwnProperty("color"); // vai ser true
+meny.hasOwnProperty("height"); // vai ser false
+__________________________________________________________________
+
+TUDO EM JAVASCRIPT É OBJETO
+-> Existem os objetos normais criados por você, mas também tudo que você criar vai ser armazenado num GRANDE OBJETO. ou seja, você pode acessar métodos do próprio javascript, sem precisar criar métodos dentro de objetos
+
+ex:
+var nome = "antonio"; //variavel solta
+
+nome.lenght; // método para checar a quantidade de caracteres
+
+nome.replace("nio", "nia"); // método que substitui um pedaço daquela string por outra
+
+__________________________________________________________________
+
+
+
+
+
+

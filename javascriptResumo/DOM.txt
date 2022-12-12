@@ -1,0 +1,233 @@
+                         ______ WINDOW_______
+                        |         |          |
+                    LOCATION    DOCUMENT    ...(OUTROS)
+                                    |
+                            _____< HTML >___
+                           |                |
+                        <HEAD>          __<BODY>___
+                                       |           |
+                                      <H1>     <SECTION>
+                                                   |
+                                                  <H2>
+                                                   |
+                                                  <P>
+
+EXPLICAÇÃO
+
+-> para linkar um codigo JAVASCRIPT num HTML, criamos a tag <script src = "caminhoDoDocumentoJS"></script> no meio do body
+-> DOM é uma interface de programaçao para HTML, XML e SVG. Ele oferece métodos que permitem acesso à árvore. para que eles possam alterar a estrutura, estilo e conteúdo do documento
+-> o "document" é um objeto do web browser. ou seja, tentar rodar qualquer codigo que use desse objeto no console/terminal, mesmo com node.js, vai dar erro
+
+_____________________________________________________________
+
+COMANDOS INTERATIVOS COM O BROWSER
+
+alert(''); -> emite um alerta no browser (pode falar só alert('')) obs: so pega no navegador, nao no node.js
+confirm(''); -> mesmo que o alert, sendo q manda uma mensagem perguntando algo pro usuario confimrar ou cancelar. se o usuario confirmar, sai o resultado true e se cancelar false
+prompt(''); -> mesmo que os dois de cima, mas tem uma caixa para o usuário digitar algo que o alerta pedir e o resultado será aquilo que ele escrever (sempre será uma string)
+            -> é bom, por exemplo, para armazenar variaveis
+            -> let num1 = prompt('Digite um número');
+            -> num1 = parseFloat(num1);
+
+_____________________________________________________________
+
+COMANDOS DE INTERAÇAO COM HTML
+
+----------------> Seleçao de tags
+
+document.getElementById('id'); -> seleciona um elemento do documento html baseado em seu ID
+document.getElementByClassName('classe') -> seleciona um elemento do documento html baseado em sua CLASSE
+
+document.querySelector('.formulario') -> seleciona uma classe, elemento, id etc mas o tipo de chamada é igual ao do CSS (#id, .class, etc)
+x.querySelector('h1'); -> selecionamos um elemento filho daquele elemento especifico (já associado a um queryselector)
+
+paragrafo.querySelectorAll('p'); -> seleciona todos aqueles elementos especificos (no caso os <p>) daquele elemento mae (no caso o paragrafo, que é uma variavel associada a algum elemento mae)
+
+x.classList -> indica o nome da classe que aquela tag tem
+x.classList.add("nomeDaClasse") -> adiciona, àquela tag, o nome da classe dito entre parenteses
+x.classList.remove("nomeDaClasse") -> remove o nome da classe dito entre parenteses daquela tag
+x.classList.contains("nomeDaClasse") -> checa se aquela tag possui aquela classe como atributo
+x.classList.replace("nomeDaClasse", "nomeDaNovaClasse") -> substitui o nome da classe
+x.classList.toggle("nomeDaClasse") -> se aquela tag ja tiver aquela classe, ela é removida. senao, ela é adicionada (bom p usar um add event listener de click pra toda vez que clicar fazer isso e quando clicar de novo retornar do "isso")
+x.id -> indica o id que aquela tag tem
+
+----------------> Mudar o conteudo de uma tag HTML
+
+const novoH1 = document.createElement('h1'); -> criando uma nova tag HTML dentro do javascript
+novoH1.innerText = "novo titulo"
+novoH1.classList.add("titulo");
+animais.appendChild(novoH1)
+
+const cloneTitulo = titulo.cloneNode(true); -> vai clonar aquela tag (se vier com o parametro true, vai clonar os seus filhos também)
+
+x.innerText = "qualquer coisa" -> altera o valor do texto interno de uma tag especificamente
+x.innerHTML = "<p>teste</p> -> insere algo dentro daquele html. seja um texto (igual o innertext) ou até mesmo uma tag
+x.outerHTML -> vai indicar todo aquele html e o que há dentro dele (ou seja, se o x for uma section, vai pegar do começo da section até tudo que ta dentro dela)
+
+tagMae.appendChild(tagFilha) -> cria, dentro do HTML, uma tag filha daquela tag mae (podemos colocar uma tag ja existente)
+x.parentElement -> informa o pai daquela tag
+x.previousElementSibling -> pega a tag IRMÃ anterior
+x.nextElementSibling -> pega a próxima tag IRMÃ 
+x.children -> da uma html collection de todos os elementos filhos daquela tag (e podemos acessa-los como se fosse um array (x.children[0] etc) )
+
+x.getAttribute('src') -> diz o valor do src
+x.setAttribute('alt', 'É uma raposa') -> cria um novo atributo (caso nao exista) ou atualiza um atributo ja existente("NOMEDOATRIBUTO", "VALOR")
+x.hasAttribute('alt') -> indica se possui tal atributo (true ou false)
+x.removeAttribute('alt') -> remove aquele atributo
+
+_____________________________________________________________
+
+INTERAÇAO COM O USUARIO
+
+btn.addEventListener("click", () => * funçao * ) -> ao usuario clicar, algo acontece
+btn.addEventListener("input", () => * funcao * ) -> ao usuario escrever algo num espaço de input, algo acontece
+btn.addEventListener("mouseover", () => * funçao * ) -> ao usuari passar o mouse por cima, algo acontece
+btn.addEventListener("scrow", () => * funçao * ) -> ao usuario dar o sroll, algo acontece
+btn.addEventListener("resize", () => * funçao * ) -> ao usuario dar resize no browser, algo acontece
+btn.addEventListener("mouseover", () => * funçao * ) -> ao usuari passar o mouse por cima, algo acontece
+
+btn.addEventListener("keydown", () => * funçao * ) -> ao usuari pressionar uma tecla, algo acontece
+btn.addEventListener("keyup", () => * funçao * ) -> ao usuari soltar a tecla, algo acontece
+        -> nesses 2 especificamente, podemos checar qual tecla foi apertada:
+        addEventlistener("keydown", e => {
+            if(e.key === "a") console.log("teclou a")
+        })
+
+
+
+
+
+*dentro do addeventlistener (e => )*
+    e.target -> indica qual o elemento que estamos interagindo com o tipo de evento (ex: se clicarmos numa imagem, vai aparecer a tag da imagem)
+    e.preventDefault() -> faz com que o comportamento padrão daquele evento nao ocorra (tipo o envio de um formulario)
+    e.key  -> diz qual tecla foi apertada no caso do event listener do keydown
+_____________________________________________________________
+
+PERCORRENDO TODAS TAGS QUE POSSUEM AQUELA MESMA CLASSE (com for)
+
+* supondo que existem varias tags com a classe validar [estamos tentando validar algo] *
+            * Estamos dentro de uma classe *
+
+            constructor{
+
+                this.formulario = document.querySelector('.formulario');
+
+            }
+
+            for(let campo of this.formulario.querySelectorAll('.validar')){
+                if(!campo.value){ // dizendo que o campo está vazio
+
+                }
+            }
+
+_____________________________________________________________
+
+CSS
+
+--------> INTERAGINDO COM O CSS
+   
+
+
+--------> ALTERANDO CSS
+
+x.style.cssText = `font-size = 40px; border: 0.3rem solid black` -> vai mudar diretamente no css. o x está associado a algum queryselector
+x.src -> vai mudar a src (source) da tag x (que estara associada a um queryselector). util para mudar tags de imagem por exemplo
+
+____________________________________________________________________
+
+CAPTURAR A TAG QUE O USUARIO CLICOU
+
+document.addEventListener('click', e => {
+    const elemento = e.target;
+    const tag = elemento.tagName.toLowerCase();
+
+    if(tag === "a") {
+        *codigo aqui*
+    } else {
+        *codigo aqui*
+    };
+})
+
+_____________________________________________________________
+
+FOR EACH E EVENTOS
+
+const imgs = document.querySelectorAll('img');
+
+imgs.forEach( img => {*codigo aqui*})
+
+_____________________________________________________________
+
+DATA SET E COMUNICAÇAO HTML VS JAVASCRIPT
+
+-> o dataset é uma propriedade do HTMLElement/
+-> Ele vai mapear todos as tags que possuem atributos chave= "valor" em que as chaves começam com a palavra data
+
+ex:
+
+                HTML:
+
+                <div data-cor="azul" data-width= "500"> Div aleatoria </div>
+
+                JAVASCRIPT:
+
+                div.dataset.cor // azul
+                div.dataset.width // 500
+
+                        obs: podemos selecionar tags atraves do javascript de acordo com o data
+                
+                let div = document.querySelector('[data-cor]')
+                div = document.querySelector('[data-cor="azul"]')
+                        
+                        obs2: ou deletar esses datasets
+
+                delete div.dataset.cor
+
+_____________________________________________________________
+
+FORMS
+
+-> Podemos acessar um formulario especifico so por document.forms.nomeDoForms
+
+ex:
+                HTML: 
+
+                <form name="contato" id="contato">
+                    <label for="nome"> Nome </label>
+                    <input type= "text" name= "nome" id= "nome">
+                </form>
+
+                JS: 
+
+                document.forms // lista com os formularios do html
+                document.forms.contato // form com o atributo nome "contato"
+                document.forms.contato.elements // elementos do forms contato
+                document.forms[0].elements[0].value // valor do primeiro elemento do primeiro formulario
+
+-> Capturando valores de inputs de formulários
+
+A propriedade value retorna o valor do elemento no formulário. 
+
+                HTML:
+
+                <form name="contato" id="contato"> // DECLARA FORM
+                    <label for="nome">Nome</label> // LABEL 1
+                    <input type="text" name="nome" id="nome"> // INPUT 1
+                    <label for="email">Email</label> // LABEL 2
+                    <input type="email" name="email" id="email"> // INPUT 2
+                    <label for="mensagem">Mensagem</label> 
+                    <textarea name="mensagem" id="mensagem"></textarea>
+                </form>
+
+                JS:
+
+                const form = document.querySelector(".form")
+
+                form.addEventListener("submit", e => {
+                    e.preventDefault()
+                    const nomeValue = document.getElementById('nome').value;
+                    const sobrenomeValue = document.getElementById('sobrenome').value;
+
+                    return;
+                });
+

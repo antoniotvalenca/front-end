@@ -1,0 +1,303 @@
+FUNÇÕES MANUFATURADAS e STRING
+-> blocos de código que realizam uma série de ações. eles recebem um parametro e retornam um valor baseado nesse parametro.
+
+ex:
+
+function areaQuadrado(lado){
+    return lado*lado;
+}
+
+areaQuadrado(4); // vai dar 16
+
+ex 2:
+
+function imc(peso,altura){
+    const imc = peso / (altura**2);
+    return imc;
+}
+
+
+obs: independente do conteudo da funçao, o seu resultado conceitualmente falando está no return (ex: se vc tentar armazenar o resultado de uma funçao numa variavel, o que irá armazenar é o que está no return)
+
+__________________________________________________________________
+
+ARROW FUNCTION
+
+-> Simplifica a criaçao de funçoes
+
+const raiz = n => n**2; // uma funçao que recebe o parametro n e retorna n ao quadrado
+
+__________________________________________________________________
+
+Também podemos definir um pré-valor para os parametros de uma funçao. Caso o usuario não digite um valor para aquele parametro, aquele será o valor assumido para ele. Caso ele digite (como deveria digitar), o valor digitado será colocado por cima
+
+        function soma (a, b = 2){
+            return a + b;
+        }
+
+        soma(2); // o output será 4
+        soma(2, 5); // o output será 7
+
+__________________________________________________________________
+
+INSERIR UMA QUANTIDADE DE PARAMETROS INDEFINIDOS
+-> rest operator(...numeros) permite que eu possa colocar quantos parametros quiser
+        function conta(operador, acumulador, ...numeros) {
+            for(let numero of numeros){
+                if (operador === "+") acumulador += numero;
+                if (operador === "-") acumulador -= numero;
+                if (operador === "/") acumulador /= numero;
+                if (operador === "*") acumulador *= numero;
+            }
+            console.log(acumulador);
+        }
+
+__________________________________________________________________
+
+ARGUMENTOS DE UMA FUNÇAO
+
+-> para nos referirmos aos parametors passados pelo proprio usuário dentro do escopo da funçao, podemos nos referir a estes como "arguments"
+-> não serve para alguns tipos de declaraçao de funçao (como o arrow function)
+
+        function conta(operador, acumulador,...numeros){
+            console.log(arguments);
+        }
+
+        conta("+", 1, 20, 30, 50, 60); // Irá printar "+, 1, 20, 30, 50, 60", que são os argumentos dados pelo user
+
+__________________________________________________________________
+
+FUNÇOES ORIENTADAS A OBJETO
+
+        function criarPessoa(nome, sobrenome, idade){
+            return {nome, sobrenome, idade} // ou {nome: nome, sobrenome: sobrenome, idade: idade} tanto faz
+        }
+
+        const p1 = criaPessoa('Luiz', 'Otávio');
+
+__________________________________________________________________
+
+GARANTIR QUE AS FUNÇOES SEJAM EXECUTADAS EM ORDEM
+
+-> Muitas vezes, algumas funçoes demoram mais para serem executadas que outras. Mas, para garantir a integridade da árvore de funçoes, isto é, respeitar a ordem de cada uma, usamos o chamado "callback". Esse callback será um parametro das funçoes (menos da ultima) e iremos usar a condicional "if(callback) callback();" para garantir essa concatenaçao de funçoes
+
+        function f1(callback){
+            setTimeout(function(){
+                console.log("f1");
+                if(callback) callback();
+            }, 1000);
+        }
+
+        function f2(callback){
+            setTimeout(function(){
+                console.log("f2");
+                if(callback) callback();
+            }, 1000);
+        }
+
+        function f3(){
+            setTimeout(function(){
+                console.log("f3");
+            }, 100);
+        }
+
+        f1(() => f2(() => f3())); // assim, independente da lentidao de uma ou de outra, a sua ordem será respeitada
+
+ __________________________________________________________________
+
+IIFE (Immediately invoked function expression)
+
+-> É um tipo de função relâmpago que declaramos para proteger o escopo global mas, ainda assim, executar um código imediatamente.
+-> Ou seja, quando colocamos um código dentro de uma IIFE, quando chega a hora de executar o código da função, tudo que tiver na função será executado como se não fosse uma função em sí, mas parte do escopo global.
+-> É usada para proteger o escopo global (variaveis etc) mas, ainda assim, rodar um código (é como se fosse um mundinho particular do escopo global)
+-> Estrutura de declaração:
+
+        (function(){
+            *codigo*
+        })();
+-> EX:
+
+        (function(){
+            const nome = "Antonio";
+            console.log(nome); // vai printar o nome normalmente, como se fosse parte do codigo normal
+
+            function nomeCompleto(nome, sobrenome){
+                const sobrenome = "Valença";
+                return `${nome} ${sobrenome}`;
+            }
+
+            nomeCompleto(nome, sobrenome); // vai printar o nome completo normalmente
+        })();
+
+            const nome = "Qualquer coisa"; // posso usar essa variavel "nome" como se fosse nova (já que não faz parte do escopo estrutural inicial que ela foi usada)
+
+            obs: dentro do primeiro () podemos colocar variaveis e dentro do segundo () podemos colocar parametros, como se fosse uma funçao normal, e usa-los dentro dessa funçao imediata
+__________________________________________________________________
+
+FABRICA
+
+function criaPessoa(nome, sobrenome){
+    return{
+        nome,
+        sobrenome,
+
+        fala(assunto) {
+            return `${this.nome} está ${assunto}.`;
+        }
+    };
+}
+
+const p1 = criaPessoa("Antonio", "Valença");
+
+console.log(p1.fala("estudando JS"));
+
+__________________________________________________________________
+
+RECURSIVA
+
+-> É uma função que, quando chamada, se autoexecuta varias vezes até atender as condiçoes do return
+-> Isso acontece porque, após o if > return, ela é chamada dentro de sí mesma (num tipo de paradoxo)
+
+        function contagemRegressiva(num){
+            console.log(num);
+            if (num===0) return;
+            num--
+            contagemRegressiva(num); // o que simboliza as funçoes recursivas
+        }
+
+-> Desta forma, enquanto o num nao atender as condiçoes do if>return, ela será reexecutada num looping até atender.
+
+__________________________________________________________________
+
+FUNCAO QUE GUARDA VARIOS VALORES E USAMOS .NEXT PARA PRINTAR O PROXIMO (GERADORAS)
+
+-> São funçoes com um tipo de return diferente, o chamado "yield" (mas que funciona do mesmo jeito)
+-> Podemos colocar quantos yields quisermos, ou seja, a função pode guardar vários valores de return
+-> Para acessarmos os valores do yield, chamamos a função + .next (e cada .next, da o output do valor seguinte)
+
+        function* geradora() {
+            //codigo qualquer
+            yield 'Valor 1';
+            //codigo qualquer
+            yield 'Valor 2';
+            //codigo qualquer
+            yield 'Valor 3';
+        }
+
+        const g1 = geradora();
+        g1.next().value; // valor 1
+        g1.next().value; // valor 2
+        g1.next().value; // valor 3
+
+__________________________________________________________________
+
+FAZER FUNÇOES (QUE MEXEM COM TEMPO) RESPEITAREM UMA ORDEM INDEPENDENTE DO TEMPO ESTABELECIDO (Promise)
+
+Promise -> é um objeto do javascript que representa o sucesso ou a falha de uma operaçao assincrona.
+        -> A promise sempre vai ter 2 resultados:
+
+                                    1) resolve: significa que os dados que eu queria foram obtidos.
+                                    2) reject: um erro aconteceu e a promise foi rejeitada
+
+        -> const getData = () => {
+                new Promise( (resolve, reject) => {
+                    resolve('Dados aqui')
+                    reject('Erro aqui')
+            })
+        }
+
+        -> Após o resultado da operaçao, o valor da promise (seja de resolve ou de reject) fica encapsulado
+           na promise. para ver, só precisamos usar o .then (no caso do resolve) ou o .catch (no caso do reject)
+        -> getData().then(value => console.log(value)) vai retornar o que for salvo em resolve
+        -> getData().catch(error => console.log(error)) vai retornar o que for salvo em reject
+                obs: essa arrow function dentro do .then e .catch pode ser qualquer arrow function:
+
+                -> getData.then( () => {console.log(2+2)} )
+        -> também podemos associar a promise como retorno de uma funçao
+
+            function aleatoria() {
+                return new Promise((resolve, reject) => if x reject('rejeitou') else resolve('resolveu')
+            }
+_____________________________________________________________
+
+METODOS C PROMISE
+
+Promise.all(arrayComPromises) -> vai analisar e executar todas as funçoes com Promise. se alguma der erro, o resultado geral será o erro. se tudo estiver certo, será retornado o que estiver no .then e se estiver algum errado cairá tudo no .catch
+        Promise.all(arrayComPromises).then( () => *codigo* ).catch( () => *codigo* )
+
+Promise.race(arrayComPromises) -> vai retornar a mais rápida de ser executada
+Promise.resolve("aceitou") / Promise.reject("rejeitou") -> Jeito alternativo de estabelecer um Promise:
+        function analisaNumero(num){
+            if(num>10){
+                return Promise.resolve("é maior que 10. acertou");
+            } else {
+                return Promise.reject("nao é maior que 10. errou");
+            }
+        }
+
+        analisaNumero().then(...).catch(...)
+
+_____________________________________________________________
+
+ASYNC E AWAIT
+
+ASYNC:
+        -> async function nome() {
+            if(x){
+                throw new Error("novo erro");
+            } else {
+                return y;
+            }
+        }
+
+// quando usamos async antes de declarar uma funçao, estamos implicitando que ela é uma funçao promise. Ou seja, aquilo que cair no throw será o reject e aquilo que for retornado com sucesso será um resolve. entao podemos fazer:
+
+            nome().then( () => *codigo* ).catch(err => console.log(err));
+
+
+AWAIT:
+
+        -> async function getPost() {
+            const response = await fetch(url)
+
+            console.log(response);
+        }
+
+        getPost()
+
+// o await é usada dentro de uma funçao async. ela garante que codigos associados a uma promise (e portanto tendo o perigo de serem asincronos) sejam executados respeitando o escopo
+
+// ou seja, nesse caso, mesmo o console.log sendo um comando muito mais rapido que um fetch, ele vai ser executado depois da resposta obtida pelo await, ja que o await so segue o baile depois que é executado corretamente
+
+// obs: o await só é executavel quando ao lado de uma promise
+
+-> para juntar os dois de um jeito certo: 
+
+
+            function printTresSegundos(num) {
+            return new Promise( (resolve, reject) => {
+                setTimeout( () => {
+                if(num<1000){
+                    reject("Número muito baixo");
+                } else {
+                    resolve("Numero correto");
+                }
+                }, num)})}
+
+            async function naOrdem() {
+            try{ // A) vai tentar executar esse codigo
+
+                const fase1 = await printTresSegundos(2000); // B) a async vai esperar o await realizar a funçao
+                console.log(fase1); // B) vai printar o valor do resolve após o fim da execucao do await
+
+                const fase2 = await printTresSegundos(900)
+                console.log(fase2);
+
+            } catch(e) { // A) se der erro cai aqui
+
+                console.log(e); // e printa o erro da funçao await que deu erro (ou seja, se um await der certo, vai passar mas se o proximo der erro tudo cai no erro)
+
+            }
+            }
+
+            naOrdem()

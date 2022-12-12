@@ -1,0 +1,64 @@
+TRY CATCH FINALLY THROW
+
+-> Usamos o try/catch/throw em situaçoes que vamos rodar um codigo "perigoso", isto é, que potencialmente dará erros
+_____________________________________________________________
+BASE DO TRY...CATCH...FINALLY
+
+try {
+    //É executado quando não há erros
+} catch(error) {
+    //É executado quando há algum erro no try
+} finally {
+    //Sempre é executado (mas não é obrigatório, como a dinâmica do try...catch)
+}
+
+_____________________________________________________________
+
+EXPLICAÇÃO
+
+-> o try tenta rodar o codigo. A partir do momento que em algum lugar do try der ERRO, entra o catch para rodar alguma outra linha de código
+-> Ou seja, até onde no TRY for "acerto", irá rodar, independentemente se a linha de código seguinte do try for um erro. mas, quando esse erro aparecer, o CATCH vai entrar e fazer algo a respeito (que normalmente é indicar que há um erro)
+-> o try...catch é muito utilizado em situações em que o usuário precisa inserir um input ou que trabalha com dados de alguma fonte externa
+
+_____________________________________________________________
+
+EXEMPLO CATCH...TRY
+
+const numero = 5;
+
+try {
+    console.log("Olá"); // vai rodar
+    const numero = 8;  // vai ativar o catch
+} catch(error) {
+    console.log("Você não pode redeclarar constantes"); // vai rodar
+};
+
+_____________________________________________________________
+
+THROW
+
+-> O throw CRIA erros dentro da própria estrutura do JS. Isto é, se o que o código rodar atender às especificaçoes do THROW, ele lida com aquilo como um erro e todo o resto do código abaixo (sendo do mesmo bloco) nao é rodado, e o controle é passado para o próximo CATCH, que lidará com o erro
+
+function soma(x, y){
+    if(
+        type of x !== 'number' ||
+        type of y !== 'number'
+    ) {
+        throw('x e y precisam ser números');
+    }
+    return x + y;
+}
+
+try {
+    console.log(soma(1, 2)); // vai rodar
+    console.log(soma('1', 2)) // vai dar o erro criado no throw, e vai direto pro catch
+} catch(error){
+    console.log(error); // vai printar a frase prestabelecida no throw
+}
+
+obs: Caso seja o caso de, além de printar a frase prestabelecida no throw, também printar as questoes circundantes do erro de codigo, declara-se o throw como "throw new Error('x e y precisam ser números.');
+
+// vai printar:
+
+Error: x e y precisam ser números.
+    at soma(/......) // vai mostrar as linhas de codigo q ouveram o erro etc

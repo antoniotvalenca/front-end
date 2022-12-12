@@ -1,0 +1,200 @@
+
+PROGRAMAÇAO ORIENTADA A OBJETO
+
+Classe -> mesma coisa de constructor function, só muda o jeito de escrever
+       -> o lado bom das classes é que quando criamos métodos, eles já são automaticamente colocados no __proto__ da classe (ou seja, diferentemente das constructoro functions, nao precisamos passar por aquela situ de criar prototypes)
+_____________________________________________________________
+
+CRIAR UMA CLASSE
+
+        class Pessoa {
+            constructor(nome, sobrenome) { // método que permite, na criaçao de uma nova classe, passar parametros que serao incorporados nas caract da classe
+                this.nome = nome;
+                this.sobrenome = sobrenome;
+            }
+        }
+
+
+        const p1 = new Pessoa('Antonio',  );
+        console.log(p1)
+
+_____________________________________________________________
+
+CRIAR METODOS
+
+        class Pessoa {
+
+            falar() {
+                *codigo*
+            }
+
+            comer() {
+                *codigo*
+            }
+        }
+
+        EX:
+
+        class Carro {
+
+            constructor(nome) {
+                this.nome = nome;
+                this.velocidade = 0;
+            }
+
+            acelerar() {
+                if(this.velocidade >= 100) return;
+                this.velocidade--
+            }
+
+            freiar() {
+                if(this.velocidade >= 100) return;
+                this.velocidade--;
+            }
+        }
+
+        const carro1 = new Carro(corola)
+
+        for(let i = 0; i<= 200; i++){
+            carro1.acelerar(); // vai chegar a acelerar até 200. mas como existe um limite de 100, entao será até 100 mesmo
+        }
+
+obs: quando colocamos um método (que está construido no escopo da classe) já de cara dentro do contructor (ex: constructor{ this.nome = nome; this.sobrenome = sobrenome; nomeCompleto()}) o método já é de cara executado já na criaçao da classe
+_____________________________________________________________
+
+GETTER E SETTER
+
+O objetivo principal é tratar métodos como propriedades, facilitando a manutençao de dados internos da classe
+
+Getter (get) -> usamos para obter o valor de um atributo. seja pra retornar uma propriedade ja existente ou seja pra criar uma nova "propriedade" (metodo que se comporta como propriedade) que retorna um valor especifico. EX: ter 2 propriedades nome e sobrenome e ter um getter que retorna o nome completo
+
+Setter (set) -> usamos para mudar o valor de um atributo. é conveniente, por exemplo, ao querermos limitar o valor de um atributo (o que nao conseguiriamos nao tendo o setter). EX: quremos limitar a quantidade de poder ou turbo que alguem num jogo teria
+
+ou seja, é como se o getter fosse ser uma propriedade e para a mudar-mos usamos o setter, que se comportara levando em conta que o getter é uma propriedaed e nao um metodo
+
+            class Carro {
+                constructor(marca, modelo, cor){
+                    this.marca = marca
+                    this.modelo = modelo
+                    this.cor = cor
+
+                    this.ligado = false
+                    this.km = 0
+                    this.combust = 10
+                }
+
+                ligar(){
+                    this.ligado = true
+                }
+
+                desligado(){
+                    this.ligado = false
+                }
+
+                setCombust(v){
+                    this.combust = v                       // nesse, mudamos o valor do combustível declarando carro1.setCombust(100) [nao é setter]
+                }
+
+                set Combust(v) {
+                    this.combust = v                      // nesse, mudamos o valor do combuscitvel declarando carro1.Combust = 100 [é setter]
+                }
+            }
+
+_____________________________________________________________
+
+HERANÇA EM CLASSES
+
+Mesmo conceito de sempre: podemos criar classes que sejam subclasses de outras. Desta forma, herdariam as caracteristicas (PROPRIEDADES E METODOS) da classe manutençao
+-> class DispositivoEletronico
+-> class Smartphone extends DispositivoEletronico // ira herdar do DispositivoElETRONICO
+
+Obs: caso queiramos adicionar novas categorias de propriedades na classe filha, teriamos que chamar o constructor { super(nome, sobrenome (...) ) } // esse super se refere a superclasse dessa subclasse e dentro do parenteses colocamos os parametros que esa superclasse ja recebia
+
+Obs2: no caso dos métodos, apesar deles serem herdados podemos também, dentro da subclasse/classefilha, altera-los ou redeclara-los com outras funcionalidades, sem demais problemas
+
+                  criando a super classe
+                // ____________________//
+
+                class DispositivoEletronico {
+                    constructor(nome){
+                        this.nome = nome
+                        this.ligado = false
+                    }
+
+                    ligar() {
+                        this.ligado = true
+                    }
+
+                    desligar() {
+                        this.ligado = false
+                    }
+
+                }
+
+                class Smartphone extends DispositivoEletronico {
+
+                    constructor(nome, cor){ // colocamos todos os parametros que receberia da super classe + dessa classe
+
+                        super(nome); // agora declaramos a superclasse desse jeito, colocando entre parenteses os parametros que so ela receberia
+                        this.cor = cor; // uma nova propriedade
+
+                    }
+
+                }
+
+                const s1 = new Smartphone('iphone', 'preto')
+
+_____________________________________________________________
+
+MÉTODOS ESTATICOS E DE INSTANCIA
+
+De instancia (instancia.metodo()) -> sao metodos genericos, que usamos depois de declararmos a sua instancia
+        class Pessoa{
+            constructor(nome){
+                this.nome = nome
+            }
+
+            dizerOi(){
+                console.log(`${this.nome} disse Oi`); // método de instancia
+            }
+        }
+
+        const pessoa1 = new Pessoa("antonio");
+        pessoa1.dizerOi(); // instancia.metodo()
+
+
+Estáticos(classe.metodo()) -> sao metodos que so sao utilizados ao serem declarados ao lado do nome da classe. eles nao tem uma utilidade especifica, apenas funcionam como funcoes que seriam colocadas no escopo da classe. EX: Math.random é um exemplo de metodo estatico, em que a classe Math chama o metodo estatico random para realizar uma açao. Mas, dentro da classe Math, ele nao tem nenhuma utilidade (talvez tenha fora, assim como qualquer outra funçao)
+-> declaramos ele com a palavra static antes do metodo
+
+        class Teste{
+            constructor(teste, teste2){
+                this.teste = teste
+                this.teste2 = teste2
+            }
+
+            static soma(x, y){
+                return x + y;
+            }
+        }
+
+        console.log(Teste.soma(2, 4)) // vai retornar 6. apenas uma funçao aleatoria, nao existe funcionalidade especifica dentro da classe
+
+_____________________________________________________________
+
+Relembrando Object.defineProperty ...
+
+DEFINIR UMA NOVA PROPRIEDADE DE UM OBJETO, EDITANDO SUAS QUALIDADES (SE É VISÍVEL, SE NÃO É, SE É REESCREVÍVEL ETC) 
+
+-> OBJECT.DEFINEPROPERTY()
+        const pessoa1 = {
+            nome: 'antonio',
+            sobrenome: 'valença',
+            idade: 21,
+        }
+        Object.defineProperty(pessoa1, 'sexualidade', {
+            value: "gay", // define o valor dessa propriedade (number, string etc)
+            enumerable: true, // controla se é visivel ou invisivel
+            writable: false, // se o valor pode ser alterado ou nao depois
+            configurable: false // controla se podemos mais tarde redeclarar o defineproperty com esses mesmos parametros e reconfiguralos (ex:
+                                // se eu quiser mudar o atributo "writable" redeclarando no codigo. por exemplo, nao podemos apagar pessoa1.sexualidade)
+        });

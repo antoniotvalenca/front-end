@@ -1,0 +1,28 @@
+VARIAVEIS
+
+var -> variáveis que sao declaradas como "var" vazam de blocos de código (ou seja, se eu declarar o i de um for loop como var, o valor do i irá vazar para fora do for loop). além disso, essas variáveis podem ser utilizadas mesmo antes de serem declaradas. ou seja, se eu declarar ela na linha 10 mas utilizar ela na linha 2 irá funcionar
+
+let -> elas respeitam o bloco e só podem ser utilizadas após sua declaração. essa variável pode ser atualizada mas não re-declarada
+
+let x = 2;
+x = 3; // está certo
+
+let x = 2;
+let x = 3; // está errado
+
+mas se elas forem declaradas em escopos diferentes, funcionará.
+
+const -> são lets mas que não podem ser atualizadas/redeclaradas. elas mantem aquele mesmo valor (mas respeitando o seu escopo);
+
+____________________________________________________________________________________________________________________
+
+DATATYPE
+
+const nome = 'antonio'; // string
+const num1 = 10; // number
+const num2 = 10.55; // number
+let nomeAluno; // undefined
+const sobrenomeAluno = null; // null é um valor que atribuimos uma variavel para esvaziar ela
+const aprovado = true; // boolean: true, false
+
+typeof nome -> printa o datatype dessa variavel (string no caso)

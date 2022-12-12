@@ -1,0 +1,230 @@
+JAVASCRIPT ASSINCRONO (PROMISES, ASYNC AWAIT, FETCH)
+
+-> Em javascript, as vezes realizamos operações que exigem um pouco de mais tempo do programa e por isso afeta a ordem cronologica do codigo
+        -> chamadas para API
+        -> Interaçao com banco de dados
+        -> setTimeout etc
+-> Lidamos com essa discreprancia criando promises e as associando a uma funçao async que executa essas promises atraves do await.
+
+____________________________________________________________________
+
+PROMISE
+
+É um objeto do javascript que representa o sucesso ou a falha de uma operação assíncrona.
+    -> alguns métodos internos do javascript, como .fetch, já são promises (por exemplo)
+
+Usamos as funçoes Promises junto com os métodos .then e .catch em que .then( () => { *codigo aqui* }) irá executar um código após o código assincrono da promise ser executado e .catch( () => { *codigo aqui* }) identifica se há um erro na execuçao e instantaneamente executa o que tiver dentro do catch
+
+Para criar uma nova promise, declaramos, no return de uma funçao:
+         new Promise( (resolve, reject) => { *codigo aqui* } )
+    -> em que resolve() representa um return alternativo da Promise para indicar quando ela foi concluida com sucesso e reject() um return alternativo da Promise para indicar que houve um erro nela.
+
+                                function teste() {
+                                return new Promise((resolve, reject) => {
+                                    setTimeout( () => {
+                                        console.log("after 3 seconds")
+                                        resolve();
+                                    }, 3000)
+                                })
+                            }
+
+                            teste().then( () => {console.log("ok")})
+
+Nesse exemplo, o .then irá respeitar o tempo do teste() que é uma promise e saíra no console:
+                    CONSOLE ->  after 3 seconds
+                                ok
+
+OBS: Se as funçoes dentro do .then() forem tambem promises, podemos colocar .then seguidos de outros .then
+
+OBS2: Normalmente, não iremos criar Promises e sim consumí-las. Isto é, utilizaremos de métodos/bibliotecas que já são naturalmente Promises e iremos usar async/await (que veremos mais para frente) e/ou then/catch com elas
+        ex: axios.get(*url aqui*).then( () => {*codigo aqui*})
+____________________________________________________________________
+
+METODOS C PROMISE
+
+Promise.all(arrayComPromises) -> vai analisar e executar todas as funçoes com Promise. se alguma der erro, o resultado geral será o erro. se tudo estiver certo, será retornado o que estiver no .then e se estiver algum errado cairá tudo no .catch
+        Promise.all(arrayComPromises).then( () => *codigo* ).catch( () => *codigo* )
+
+Promise.race(arrayComPromises) -> vai retornar a mais rápida de ser executada
+Promise.resolve("aceitou") / Promise.reject("rejeitou") -> Jeito alternativo de estabelecer um Promise:
+        function analisaNumero(num){
+            if(num>10){
+                return Promise.resolve("é maior que 10. acertou");
+            } else {
+                return Promise.reject("nao é maior que 10. errou");
+            }
+        }
+
+        analisaNumero().then(...).catch(...)
+
+__________________________________________________________________
+
+ASYNC E AWAIT
+
+ASYNC:
+        -> async function nome() {
+            if(x){
+                throw new Error("novo erro");
+            } else {
+                return y;
+            }
+        }
+
+// quando usamos async antes de declarar uma funçao, estamos implicitando que ela é uma funçao promise. Ou seja, aquilo que cair no throw será o reject e aquilo que for retornado com sucesso será um resolve. entao podemos fazer:
+
+            nome().then( () => *codigo* ).catch(err => console.log(err));
+
+
+AWAIT:
+
+        -> async function getPost() {
+            const response = await fetch(url)
+
+            console.log(response);
+        }
+
+        getPost()
+
+// o await é usada dentro de uma funçao async. ela garante que codigos associados a uma promise (e portanto tendo o perigo de serem asincronos) sejam executados respeitando o escopo
+
+// ou seja, nesse caso, mesmo o console.log sendo um comando muito mais rapido que um fetch, ele vai ser executado depois da resposta obtida pelo await, ja que o await so segue o baile depois que é executado corretamente
+
+// obs: o await só é executavel quando ao lado de uma promise
+
+-> para juntar os dois de um jeito certo:
+
+
+            function printTresSegundos(num) {
+            return new Promise( (resolve, reject) => {
+                setTimeout( () => {
+                if(num<1000){
+                    reject("Número muito baixo");
+                } else {
+                    resolve("Numero correto");
+                }
+                }, num)})}
+
+            async function naOrdem() {
+            try{ // A) vai tentar executar esse codigo
+
+                const fase1 = await printTresSegundos(2000); // B) a async vai esperar o await realizar a funçao
+                console.log(fase1); // B) vai printar o valor do resolve após o fim da execucao do await
+
+                const fase2 = await printTresSegundos(900)
+                console.log(fase2);
+
+            } catch(e) { // A) se der erro cai aqui
+
+                console.log(e); // e printa o erro da funçao await que deu erro (ou seja, se um await der certo, vai passar mas se o proximo der erro tudo cai no erro)
+
+            }
+            }
+
+            naOrdem()
+
+Em resumo:
+
+async function aleatoria() {
+    const teste1 = await *promise*; // vai executar primeiro independente do tepmo
+    const teste 2 = await *promise*; // vai executar segundo independente do tempo
+
+    await teste3(); // vai executar terceiro independente do tempo
+
+    console.log(teste1 + teste2) // resto do codigo que vai ser executado de modo sincrono
+}
+
+__________________________________________________________________
+
+REQUISIÇAO ASSINCRONA ( XMLHTTPREQUEST -> faz AJAX (Assyncronous Javascript XML) )
+-> SEMANTICAMENTE: fazer com disponibilizemos de dados sem atualizar uma pagina. tipo quando vc clica num botao e, ao inves dele redirecionar pra outra pagina, ele so dispoe de uma lista de coisas aleatorias mas a pagina é a mesma. Normalmente esses dados virão de um arquivo json
+-> Busca algum conteúdo da internet / back-end / API e de qualquer tipo(XML, JSON, texto puro, etc) mesmo tendo em seu nome XML não se resume apenas a isso
+-> Basicamente, voce vai criar uma constante chamada xhr (nome padrao dos codificadores) e associa-la ao construtor do XMLHTTPREQUEST:
+            const xhr = new XMLHttpRequest();
+-> Agora, usando o xhr, voce pode associa-lo a algum método especifico:
+            xhr.open("GET", "url da pagina") --> isso vai abrir uma página dada pelo url em questao
+-> Isso pode ser bem sucedido ou não (afinal, podemos ou não abrir uma página web genericamente, por exemplo, e ela dar erro)
+            xhr.send() -->
+            xhr.status --> vai checar o status http, isto é, do carregamento. Se o status for um numero entre 200 e 300 é pq foi bem sucedido
+                       --> ex: o status http 404, bem conhecido, é um status de falha de conexao
+            xhr.statusText -> mesma coisa do de cima, mas em formato de texto explicativo
+            xhr.onload = () => {codigo aqui} --> ao carregar a página, uma funçao irá acontecer
+                       --> nesse caso, podemos fazer xhr.addEventListener("load", () => {});
+            xhr.responseText -> captura o material que queriamos do url (seja de um arquivo json, documento html (hospedado no live server) etc)
+            xhr.readystate (representa o estado atual da sua requisiçao. sao eles:)
+                0: requisiçao nao inicializada
+                1: estabeleceu requisicao com o servidor
+                2: pedido recebido
+                3: processando pedido
+                4: solicitaçao concluida e resposta pronta
+            xhr.onreadystatechange (é um event listener que escuta quando há uma mudança no estado de prontidao )
+
+EX DE REQUISIÇÁO COMPLETO:
+
+            const request = obj => {
+                const xhr = new XMLHttpRequest();
+                xhr.open(obj.method, obj.url)
+
+                xhr.addEventListener("load", () => {
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        obj.succes(xhr.responseText)
+                    } else {
+                        obj.error(xhr.statusText); // succes e error sao funçoes que serao criadas dentro do objeto
+                    }
+                })
+            }
+
+ou
+__________________________________________________________________
+
+FETCH
+
+obs: é uma promise entao podemos usar .then e .catch e colocar dentro de uma async function
+
+É o mesmo do de cima, mas de um jeito muito mais simples.
+
+Vai pegar dados de uma URL (seja de um arquivo ou de um site etc) vai "guardar" (so vai la e pega quando for pra usar, estabelece uma conexao) e, se o codificador quiser, pode jogar para outro lugar (tipo um arquivo html)
+
+EX:
+
+            const fetchPokemon = () => {
+                const url = "https://pokeapi.co/api/v2/pokemon/40";
+
+                fetch(url).then(response => response.json()).then(pokemon => {console.log(pokemon.name)})
+            }
+
+            fetchPokemon();
+
+Esse codigo vai, basicamente, pegar esse url de um API Pokemon, transformar o conteúdo em json e depois logar no console o seu nome 
+
+.text() -> transforma em texto
+.json() -> transforma em objeto
+.blob() -> adapta arquivos de imagem
+
+response.status -> diz o status (ex: se é 200, 404 etc)
+
+fazer o fetch -> receber a resposta e transformar em text ou json -> colocar em algum lugar (tipo num innerHTML) e se for no caso do json, como ta num formato de objeto, pode especificar qual conteudo sera transferido (ex: endereco.bairro)
+
+obs: se formos colocar um url https dentro do fetch, precisamos, de fato, colocar "https://..."
+
+obs2: IMAGENS EM FETCH -> usamos o .blob()
+
+                const image = fetch('./imagem.png')
+                imagem.then(response => response.blob).then(response => {
+                    const blobUrl = URL.createObjectURL(response) // transformo a resposta em um URL
+
+                    const imagemDoDOM = document.querySelector('.img')
+                    imagemDoDOM.src = blobUrl;
+                })
+
+__________________________________________________________________
+
+JEITO MAIS LEGÍVEL: 
+
+const init = async () => {
+    const response = await fetch("./material.json");
+    const patientData = await response.json();
+
+    renderTable(patientData);
+};
+
+CRIAR FUNÇAO ASYNC -> CRIAR UMA VARIAVEL QUE GUARDA O VALOR DO AWAIT DO FETCH -> CRIAR OUTRA VARIAVEL QUE DA O AWAIT DO RESPONSEE DA UM .JSON() NELE

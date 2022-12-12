@@ -1,0 +1,22 @@
+TERNÁRIO
+
+-> Maneira alternativa e mais simples de alocar valores em variáveis levando em conta uma condiçao (para evitar ter que abrir um laço de if-else)
+
+EX: Usuário acumulou pontos e quer saber se se tornou VIP ou se permanece como usuário NORMAL
+
+const pontuacaoUsuario = 1200;
+const nivelUsuario = pontuacaoUsuario <=1000 ? "Usuário VIP" : "Usuário normal";
+                            ^^^^^^^^         ^            ^             ^
+                            condiçao    interrogaçao   resultado1   resultado2
+                                        para indicar    (if)          (else)
+                                        os possíveis
+                                        resultados
+
+_____________________________________________________________
+
+ARROW FUNCTION
+
+-> Maneira alternativa e mais simples de criar uma funçao associada a uma variavel sem precisar criar um bloco
+// Neste exemplo, uma funçao que cheque se uma imagem é paisagem ou não recebendo sua largura e altura
+
+const paisagem = (largura, altura) => largura>altura;

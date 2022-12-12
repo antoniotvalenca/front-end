@@ -1,0 +1,236 @@
+ARRAYS
+
+const array = [];
+ou
+const array = ["Antonio", "Clarice", "Brunna"];
+
+OBS: Para nos referirmos dos indices de trás para frente, levamos em conta o indice -1 como o primeiro
+__________________________________________________________________
+
+SE REFERIR A INDICES ESPECIFICOS
+
+-> Um unico indice
+array[0]; //esta se referindo ao item de indice 0 (antonio)
+
+-> um conjunto de indices
+vetor.slice(0, 5) // vai se referir do indice 0 ao 4 (o 5 é ignorado)
+
+-> checar se aquele indice pretence
+__________________________________________________________________
+
+ALTERAR UM INDICE ESPECIFICO
+
+array[0] = "Marcelo";
+
+__________________________________________________________________
+
+ADICIONAR UM ITEM
+
+-> No começo
+array.unshift('Julia') // adiciona no começo do array e empurra os itens pro indice seguinte
+
+-> No final
+1) array[3] = "Junior";
+2) array[array.lenght] = "Carlos";
+3) array.push("Juvenal");
+
+__________________________________________________________________
+
+TIRAR UM ITEM
+-> final do array
+vetor.pop() // remove o ultimo. obs: o .pop() retorna momentaneamente aquele indice que foi tirado do array. entao, se, por exemplo
+               eu jogra isso pra uma variavel x = array.pop(); ela irá guardar esse valor do pop e mesmo assim o array tb perderá o valor
+
+-> começo do array
+vetor.shift() // remove o primeiro
+
+delete vetor[indice] // remove aquele item especifico, deixando uma slot vaga naquele lugar (ou seja, nao mexe nos indices)
+__________________________________________________________________
+
+-> SE REFERIR A UM CONJUNTO DE INDICES ESPECIFICOS
+
+vetor.slice(0, 5) // vai se referir do indice 0 ao 4 (o 5 é ignorado)
+
+__________________________________________________________________
+
+FILTRANDO NUMEROS REPETIDOS DE UMA ARRAY
+
+                const arrayNova = arrayAntiga.filter(function(valor, index){
+                return arrayAntiga.indexOf(valor) === index;
+                });
+
+// o array.indexOf(value) vai procurar o index daquele valor. se houver mais de um index com aquele mesmo valor, o index tido como original é o primeiro que tiver aquele valor
+
+___________________________________________________________________
+
+-> CHECAR SE EXISTE UM ELEMENTO NA ARRAY
+
+x instance of vetor; // checa se x está no vetor
+
+array.indexOf('valor') // retorna o primeiro index em que o elemento pode ser encontrado no array
+__________________________________________________________________
+
+VALOR POR REFERENCIA
+
+const nomes = ['antonio', 'eduardo', 'clara', 'lucas'];
+const novo = nomes; // tudo o que eu alterar no novo vai refletir no nomes Também
+
+novo.pop();
+console.log(nomes); // agora o nomes também nao tem mais joana
+
+PORÉM SE FIZERMOS:
+
+const nomes = ['antonio', 'eduardo', 'clara', 'lucas'];
+const novo = [...nomes]; //agora podemos alterar livremente o novo sem alterar o nomed
+
+__________________________________________________________________
+
+CRIAR ARRAYS A PARTIR DE STRINGS EXISTENTES
+
+const nome = "Antonio Tenório Valença";
+const nomeArray = nome.split(" "); // nomeArray = ["Antonio", "Tenório", "Valença"];
+
+___________________________________________________________________
+
+CRIAR STRINGS A PARTIR DE ARRAYS EXISTENTES
+
+const nomeArray = ["Antonio", "Tenório", "Valença"];
+const nomeString = nomeArray.join(" "); // "Antonio Tenório Valença"
+
+obs: o que fica entre (" ") é o que vai separar um indice de outro. Normalmente usamos o espaço
+
+___________________________________________________________________
+
+SPLICE
+
+-> O Splice é um mistureba de vários métodos (pop, slice e push)
+-> Ele recebe um indice, um valor(que corresponde a quantos itens voce quer excluir incluindo o do indice inicial que voce indicou) e, por ultimo o que voce quer adicionar a partir daquele indice (nao é obrigatorio e pode ser quantos valores quiser)
+-> array.splice(indice, quantidade, elementonovo1, elementonovo2, ...)
+
+        const nomes = ["Antonio", "Brunna", "Clarice", "Lucas", "Julia"];
+        nomes.splice(1, 4, "Tenório", "Valença");
+
+        console.log(nomes); // ["Antonio", "Tenório", "Valença"]
+
+        const numeros = [1, 2, 3, 4, 5, 6];
+        numeros.splice(2, 3, 10, 11, 12);
+
+        console.log(numeros); // [1, 2, 10, 11, 12, 6]
+
+___________________________________________________________________
+
+CONCATENAÇAO DE ARRAYS
+-> usamos o x.concat(y); // x é a primeira parte e o y a segunda parte
+
+        const array1 = [1, 2, 3, 4];
+        const array2 = [5, 6, 7, 8];
+        const arrayConcatenada = array1.concat(array2);
+
+        console.log(arrayConcatenada); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+-> Também podemos concatenar usando o paremetro de ...rest
+
+        const arrayConcatenada2 = [...array1, ...array2, "Antonio", ...[9,10,11]];
+                        obs: o ...[9, 10, 11] colocamos o resto operator pq senao fica um array dentro de um array (nao é isso que queremos)
+
+___________________________________________________________________
+
+FILTER
+
+-> Filtra valores de uma array
+-> Método que cria uma nova array com novos elementos que passam por um teste de uma funçao (nao muda a array original)
+-> vetor.filter(valor, index, array) // o index e array não são obrigatórias
+
+        EX: Array com idades e saber quais vão passar de 18
+
+        const idades = [12, 18, 20, 25, 67];
+        const maioresDezoito = idades.filter(valor => valor>=18);
+        console.log(maioresDezoito); // [18, 20, 25, 67];
+
+        OU
+
+        function checkAdult(age){ // no caso, como o filter só tem 3 parametros valor index e array, qnd formos usar no filter 
+            return age>=18;          a função irá considerar o age como valor da array. se colocassemos outros parametros, a mesma
+        }                            coisa, eles iriam analisar index e array
+
+        const maioresDezoito2 = idades.filter(checkAdult);
+        console.log(maioresDezoito2); // [18, 20, 25, 67];
+
+
+
+
+
+        EX2: Saber as mulheres de um array
+
+        const nomes = ["Antonio", "Bruna", "Carlos", "Giovana", "Gilberto", "Maria" ];
+
+        const meninas = nomes.filter(value => value.endsWith("a"));
+
+        console.log(meninas);
+
+
+__________________________________________________________________
+
+MAP
+-> Mapeia os valores do array
+-> Transforma os valores de um ARRAY retornando o seu mesmo tamanho mas com valores difernetes obviamente
+-> Mesma estrutura do filter
+map(valor, indice, array)
+
+EX: Dobrar os valores de uma array
+
+        const array = [1, 2, 3, 4, 5];
+        const novaArray = array.map(valor => valor*2)
+
+
+_____________________________________________________________
+
+REDUCE
+-> o papel PRINCIPAL do reduce é reduzir todo o array para um unico elemento. Ou seja, somar todos os valores
+.reduce(acumulador, valor, indice, array)
+
+EX:
+        const array = [5, 50, 80, 1, 2, 3, 5, 8, 7, 11, 15, 22, 27];
+        
+        const soma = newArray.reduce(function(acumulador, valor) {
+                acumulador += valor;
+                return acumulador;
+        }, 0) // OBS: esse parametro ZERO é o valor do acumulador. se nao colocarmos esse valor, o acumulador vai absorver o valor inicial do array
+
+EX2: Checar o mais velho
+        const pessoas = [
+                { nome: 'Luiz', idade: 62 },
+                { nome: 'Joao', idade: 70 },
+                { nome: 'Leo', idade: 82 },
+                { nome: 'Antonio', idade: 90 },
+        ];
+
+        const maisVelho = pessoas.reduce(function(acumulador, valor){
+                if(acumulador.idade>valor.idade) return acumulador;
+                return valor;
+        });
+
+        console.log(maisVelho); // vai printar o objeto { nome: 'Antonio', idade: 90};
+
+_____________________________________________________________
+
+FOREACH
+
+-> ele percorre toda a array (valor, indice, array)
+-> faz o que quiser, utilizando desses 3 parametros fixos
+-> sempre colocamos uma funçao dentro dos parenteses (que justmaente contem esses valores)
+
+-> nomeArray.forEach(function(valor, indice, array){ 
+        *codigo*
+})
+
+EX:
+
+                const a1 = [10, 20, 30, 40, 50];
+                let somaTotal = 0;
+
+                a1.forEach(function(valor){
+                        somaTotal += valor
+                })
+
+                console.log(somaTotal) // 150
