@@ -1,0 +1,67 @@
+Em JS, cada arquivo é o seu próprio 'mundinho':
+  Não podemos usar coisas que criamos num arquivo1.js dentro do arquivo2.js, por exemplo.
+  
+Existe, porém, um comando que possibilita essa troca de dados entre arquivos JS. Desta forma, o arquivo1.js, que importa determinados dados do arquivo2.js
+(que, por sua vez, está exportando os seus dados para o arquivo1.js), pode acessar essas coisas: funçoes, variaveis, etc.
+
+
+(((OBS IMPORTANTE: PARA USAR ESSA FUNCIONALIDADE DO "ES MODULE" DE IMPORT E EXPORT, O NOME DOS ARQUIVOS QUE ESTARAO INTERAGINDO DEVE TER A EXTENÇAO .mjs
+AO INVES DE .js)))
+
+
+____________________________________________________________________________________________________________________________________________
+
+ARQUIVO 1                                       ARQUIVO2
+
+const a = 'a'                                   import { a } from './arquivo1.mjs';
+const b = 'b'
+
+export { a };
+
+// SÓ ESTARA DISPOINVEL P/
+EXPORTAÇAO O "const a"
+
+____________________________________________________________________________________________________________________________________________
+
+
+Também podemos exportar/importar dados, alterando o nome dos dados mas mantendo o seu conteúdo:
+
+____________________________________________________________________________________________________________________________________________
+
+ARQUIVO 1                                                ARQUIVO2
+
+const nome = 'antonio'                                   import { nome as primeiroNome, sobrenome as segundoNome, idade } from './arquivo1.mjs';
+const sobrenome = 'valença'                              const nome = "antonio valenca"
+const idade = 21                                         console.log(`${nome}, ${primeiroNome}, ${segundoNome}`) // antonio valenca, antonio, valenca
+
+export { nome, sobrenome, idade };
+
+____________________________________________________________________________________________________________________________________________
+
+
+Também podemos importar tudo de uma vez de um arquivo no formato de um objeto:
+
+____________________________________________________________________________________________________________________________________________
+
+
+ARQUIVO 1                                                ARQUIVO2
+
+const nome = 'antonio'                                   import * as novoObjeto from './arquivo1.mjs';
+const sobrenome = 'valença
+const idade = 21                                         console.log(novoObjeto) // vai logar um objeto com tudo que foi importado, pq o "*" 
+                                                         representa tudo, mas so pode ser usado associado ao "as"
+export { nome, sobrenome, idade };
+
+____________________________________________________________________________________________________________________________________________
+
+
+Ao invés de usarmos um export { nome, sobrenome, ... } podemos, simplesmente colocar a palavra export antes de tudo que queremos exportar 
+
+____________________________________________________________________________________________________________________________________________
+
+
+ARQUIVO 1                                                       ARQUIVO2
+
+export const nome = 'antonio'                                   import {nome, sobrenomem, idade} from './arquivo1.mjs';
+export const sobrenome = 'valença
+export const idade = 21                                         
