@@ -6,8 +6,7 @@ Existe, porém, um comando que possibilita essa troca de dados entre arquivos JS
 
 
 (((OBS IMPORTANTE: PARA USAR ESSA FUNCIONALIDADE DO "ES MODULE" DE IMPORT E EXPORT, O NOME DOS ARQUIVOS QUE ESTARAO INTERAGINDO DEVE TER A EXTENÇAO .mjs
-AO INVES DE .js)))
-
+AO INVES DE .js))) -> módulos em javascript são blocos de código como funções, classes e constantes em arquivos separados possam ser importados quando necessário, facilitando o processo de manutenção e reusabilidade de um projeto JavaScript
 
 ____________________________________________________________________________________________________________________________________________
 
