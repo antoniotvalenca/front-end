@@ -1,3 +1,4 @@
+
 NODE E MÓDULOS:
 
     -> basicamente, o node é um "ambiente" do computador que pode ser acessado e podem ser extraídas informações através da linguagem javascript.
