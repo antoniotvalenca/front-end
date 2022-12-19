@@ -1,0 +1,33 @@
+Em javascript, vimos que, para importar dados de módulos (isto é, arquivos javascript que servem como um tipo de biblioteca para outros arquivos javascript) usamos o export/importar
+
+Em node, temos também o exports/require('./arquivo.mjs')
+
+                ARQUIVO 1 (arquivo1.mjs):
+
+                const nome = "antonio"
+                const sobrenome = "valenca"
+
+                const falaNome = () => {
+                    return nome, sobrenome;
+                };
+
+                exports.nome = nome;
+                exports.segundoNome = sobrenome;
+                exports.nomeCompleto = falaNome;
+
+                // [ esse exports vai ser como se fosse um objeto criado em que existem propriedades e metodos acessiveis para quem der um require() em outro arquivo ]
+
+
+
+                ARQUIVO 2 (arquivo2.js):
+
+                const mod1 = require('./arquivo1.mjs') // vai logar todo o objeto que foi associado ao exports
+                const meuNomeCompleto = mod1.nomeCompleto;
+                const meuPrimeiroNome = require('./arquivo2.mjs').nome;
+
+No node, podemos usar tanto um quanto outro, mas é relevante entender algumas diferenças:
+        1) o exports/require() só existe para uso no node.js
+        2) o export/import é mais recente e pode ser usado para ambos javascript do browser e javascript do servidor (node.js)
+        3) o export/import é mais flexível, moderno e poderoso que o require
+        4) alguns browsers nao suportam o ES6 (que trouxe o import/export) e, entao, portanto, deve ser preciso compilar antes de usar
+        5) enquanto o export/import tem que ser declarado no topo do codigo, o require pode ser declarado em qualquer lugar do escopo do codigo
