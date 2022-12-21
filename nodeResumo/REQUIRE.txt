@@ -31,3 +31,5 @@ No node, podemos usar tanto um quanto outro, mas é relevante entender algumas d
         3) o export/import é mais flexível, moderno e poderoso que o require
         4) alguns browsers nao suportam o ES6 (que trouxe o import/export) e, entao, portanto, deve ser preciso compilar antes de usar
         5) enquanto o export/import tem que ser declarado no topo do codigo, o require pode ser declarado em qualquer lugar do escopo do codigo
+        
+OBS IMPORTANTÍSSIMO: Se o require não funcionar (por não ser compatível com ES6, etc), é só ir no package.json e digitar "type": "commonjs"
