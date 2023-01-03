@@ -1,0 +1,25 @@
+NVM
+
+-> o NVM é um gerenciador de versões do NPM
+-> ou seja, através do NVM podemos instalar alguma versão específica do NPM
+  -> ex: o NPM 18 ta na fase beta e por isso vale mais a pena usar o 16
+
+-> curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+  -> jogar esse comando no terminal para instalar o NVM
+  
+-> export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  -> vai carregar o nvm naquela pasta
+
+-> nvm use 16
+  -> agora aquele projeto estará usando o npm 16
+  
+__________________________________________________________________________________________
+
+NPX
+
+-> o NPX é o executador de pacotes do node
+-> Quando instalamos o node, ele já vem junto (ao lado do npm)
+-> Tem a mesma função que o NPM, com o diferencial que ao invés de instalarmos alguma biblioteca/módulo,
+ele executa os pacotes do node sem precisar baixá-los
+-> npx nome-do-pacote comando-específico
