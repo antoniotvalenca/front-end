@@ -1,0 +1,62 @@
+ORGANIZAÇÃO DE COMPONENTES
+
+|   |-- src/
+|   |   |-- components/
+|   |   |   |-- Header
+|   |   |   |   |-- index.js
+|   |   |   |-- Sidebar
+|   |   |   |   |-- index.js
+|   |   |   |-- Footer
+|   |   |   |   |-- index.js
+|   |   |   |-- Loading
+|   |   |   |   |-- index.js
+|   |   |   |-- Filter
+|   |   |   |   |-- index.js
+|   |   |   |-- Main.js
+
+
+-> Dentro de components, cada "módulo" vai guardar a função/classe referente a uma parte do front
+  -> pode ser me partes fixas, como o footer/header/loading, etc, aspectos que todos os arquivos.html terão
+  -> além disso, é muito usado (principalmente) em situações de interação com usuário
+    -> informações dinamicas, que são filtradas, pesquisadas, influenciadas por clique, digitação, arrastar, soltar, etc
+-> ao serem criados, serão exportados para um arquivo principal, que reune as funções lógicas (nele contidas) e a lógica encapsulada de renderização (feita no component específico)
+
+___________________________________________________________________________________________________________________________________________________________________________________
+
+-> COMPONENT ESPECÍFICO (ISTO É, SEM ESTADO)
+  -> export default componenteTal = () => {
+    return (
+      <tag> {renderizandoTalCoisa} </tag>
+    )
+  }
+
+-> COMPONENT MAIN (COM ESTADO, QUE ABSORVE INFOS DO USUÁRIO E SUAS INTERAÇÕES)
+  -> import './ComponenteEspecifico'
+
+  -> export default Main = (dadosParaRenderizar) => {
+    return (
+      <ComponenteEspecifico />
+      <outrastags> {dadosParaRenderizar.nome} </outrastags>
+    )
+  }
+
+caso o componente específico va precisar usar algum parametro que é passado no arquivo main:
+
+*** arquivo específico ***
+export default componenteTal = (props) => {
+  return (
+    <button onSubmit={props.handleSubmit}> Enviar </button>
+  )
+}
+
+*** arquivo main ***
+const handleSubmit = () => {*Codigo*}
+const handleChange = () => {*Codigo*}
+(...)
+    return (
+      <ComponenteEspecífico
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+        ...
+    )
+
