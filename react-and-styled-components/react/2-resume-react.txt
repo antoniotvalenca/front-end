@@ -1,0 +1,36 @@
+EVENTOS
+
+-> você pode responder a eventos declarando as funções event handlers dentro dos componentes:
+
+->  function MyButton() {
+    function handleClick() { alert('You clicked me'); }
+
+    return (
+        <button onClick={handleClick}> Click me </button>
+    )
+}
+
+-> perceba que, dentro do event handler "onClick", não se coloca os parenteses da funçao que é chamada. o próprio react faz isso
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ESTADO DOS COMPONENTES (useState) / UPDATING THE SCREEN
+
+-> em alguns casos, você quer que um componente seu memorize informações, que podem ser eventualmente alteradas e, por fim, renderizadas, atualizando a tela
+-> para isso, é preciso adicionar um "state" ao componente
+-> o useState() é um hook do react, em array, que recebe 2 valores : a variável que guarda o valor do estado e o seu setter, que cálcula o valor da variável quando um evento acontece
+    -> a sua sintaxe de uso é normalmente [algumacoisa, setAlgumacoisa] = useState(valorInicialDoAlgumacoisa)
+
+->  import { useState } from 'react';
+
+    function MyButton() {
+        const [count, setCount] = useState(0);
+
+        function handleClick() {
+            setCount(count + 1);
+        };
+
+        return (
+            <button onClick={handleClick}> Clicado { count } vezes </button>
+        );
+    }
