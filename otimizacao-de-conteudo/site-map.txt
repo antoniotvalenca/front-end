@@ -1,0 +1,5 @@
+SITE MAP
+-> Gerar o site map no site xml-sitemaps.com
+-> Salvar na raiz do projeto do site ou em uma pasta de fácil acesso, no arquivo sitemap.xml
+    -> E criar uma rota para ele (example.com/sitemap.xml)
+-> Enviar ao Google Search Console

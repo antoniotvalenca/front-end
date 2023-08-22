@@ -1,0 +1,17 @@
+                            SEO (Search Engine Optimization)
+
+-> é o processo de otimizar um conteúdo online para que ele ganhe mais visibilidade
+    -> mais visibilidade nos motores de busca, tipo o Google
+    -> aumenta a probabilidade de atrair tráfego orgânico (não pago) para um site
+
+1. Palavras-Chave
+    -> Usar palavras estratégicas durante a construção do contéudo do site
+
+2. <title>
+    -> Abaixo de 70 caracteres, e que seja bastante efetivo (com palavras-chave importantes)
+
+3. <meta name="description" content="Uma breve descrição do conteúdo da página usando palavras relevantes.">
+    -> Abaixo de 160 caracteres, meta descrição envolvente e informativa para cada página
+
+4. alt em imagens
+    -> Usar o alt em imagens

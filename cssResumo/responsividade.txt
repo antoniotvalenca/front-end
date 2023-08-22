@@ -1,0 +1,35 @@
+BREAKPOINTS
+
+/* Pequenos dispositivos (até 767px) */
+@media (max-width: 767px) {
+  /* Estilos para dispositivos móveis */
+}
+
+/* Dispositivos médios (768px a 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  /* Estilos para tablets e smartphones em paisagem */
+}
+
+/* Dispositivos grandes (992px a 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* Estilos para desktops pequenos e tablets em paisagem */
+}
+
+/* Desktops largos (a partir de 1200px) */
+@media (min-width: 1200px) {
+  /* Estilos para desktops em telas maiores */
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Imagens
+    -> um tamanho por responsividade OU width 100%
+
+Botões
+    -> 1. SMARTPHONES VERTICAIS / TABLETS VERTICAIS         ( width: 44-48px // heigth: 44-48px )
+    -> 2. SMARTPHONES HORIZONTAIS / TABLETS HORIZONTAIS     ( width: 48-64px // height: 44-46px )
+    -> 3. DESKTOP / TABLETS MAIORES HORIZONTAIS             ( width: 64-120px // height: 44-48px )
+    -> 4. DESKTOP MAIORES                                   ( width: 80-150px // heigth: 44-48px )
+
+Tipografia
+    -> preferência por "em/rem" (para que se ajuste de acordo com o tamanho da tela)
