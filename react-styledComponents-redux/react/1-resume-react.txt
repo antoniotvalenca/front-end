@@ -1,0 +1,126 @@
+import React from 'react'; // sempre
+
+COMPONENTS E LIGAÇÕES
+    -> o react é composto por componentes: um pedaço da UI (user interface) que tem sua própria lógica e aparência
+    -> um componente pode ser tão grande quanto uma página inteira ou tão pequeno quanto um botão
+    -> obs: tags html são em minusculo ( <tag> ) e componentes react são em maiusculo e minusculo ( <TagReact /> )
+
+    -> function MyButton () {
+        return (
+            <button> botão </button>
+        );
+    }
+
+    -> agora que criei um componente, posso criar uma ligação entre ele e outro, o colocando dentro de outro componente
+
+    -> export default function MyApp() {
+        return (
+            <div>
+                <h1> welcome to my app </h1>
+                <MyButton />
+            </div>
+        );
+    }
+
+    -> o export default marca o principal componente do file que vai ser exportado (ou seja, a função final, que liga todas as outras)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+JSX RULES
+
+-> JSX é mais restrito que HTML
+-> tags tipo <br> não podem ser usadas sem o fechamento. então, nestes casos, elas seriam usadas tipo < /br>
+-> para retornar multiplas JSX/HTML tags, você precisa criar uma tag pai e associar o resto à elas:
+    -> isto quer dizer que o componente sempre será apenas uma tag que pode, ou não, ter tags filhas dentro de sí
+
+-> function RandomTags() {
+    return (
+        <>
+            <h1> Title </h1>
+            <p> Hello, <br /> World. </p>
+        </>
+    )
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+ADDING STYLE
+
+-> em react, para especificar uma classe CSS de uma tag, se usa o atributo className= (assim como eh HTML genérico usaria-se o class=)
+-> <img className="imagem-tal" />
+
+-> o arquivo css:
+    .imagem-tal {
+        border-raius: 50%;
+    }
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+DISPLAYING DATA
+
+-> Para renderizar dados da sua aplicação, basta que você, dentro de uma tag JSX, use chaves { }, podendo colocar qualquer código javascript dentro (tanto como conteúdo da tag como atributo dela)
+-> return (
+    <>
+        <h1> {user.name} </h1>
+        <img className="imagem-tal" src={user.imageUrl} alt={'Photo of ' + user.name} style={ { width: user.imageSize, height: user.imageSize } } />
+    </>
+    );
+
+-> ou seja :: () -> tags // {} -> javascript
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+COMPONENTES VS. CONDIÇÕES
+
+-> Em react, a tendência é componentes serem renderizados de acordo com o estado da aplicação
+    -> se a página ta carregando, um load é renderizado. senão, outra coisa é, etc...
+
+-> para fazer esse controle de condições, existem algumas opções:
+
+1) Javascript Puro
+
+    ->  let content;
+        if (isLogged) {
+            content = <AdminPanel />;
+        } else {
+            content = <Loginform />;
+        }
+
+        return (
+            <div>
+                {content}
+            </div>
+        )
+
+2) Ternário dentro do JSX
+
+    ->  <div>
+            { isLogged ? (<AdminPanel />) : (<LoginForm />) }
+        </div>
+
+3) Em casos de não precisar do "else"
+
+    ->  <div>
+            { isLogged && <AdminPanel />}
+        </div>
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+RENDERIZANDO ARRAYS
+
+-> basicamente, vão ser usados o for loop e o map() para renderizar listas
+
+->  const products = [
+        { title: "Repolho", id: 1 },
+        { title: "Alho", id: 2 },
+        { title: "Maçã", id: 3 }
+    ];
+
+    agora, dentro do componente, usar a função map() para transformar o array de produtos em um array de itens <li>:
+
+
+->  const listItems = products.map( product => <li> key={product.id}> {product.title} </li> );
+
+    return (
+        <ul> {listItems} </ul>
+    );

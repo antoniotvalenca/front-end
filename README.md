@@ -1,2 +1,3 @@
-# js-html-css
-Anotações soltas JAVASCRIPT/HTML/CSS + ReactJs e Styled Components
+# front-end
+
+Anotações soltas JAVASCRIPT/HTML/CSS + ReactJs, Styled Components e Redux

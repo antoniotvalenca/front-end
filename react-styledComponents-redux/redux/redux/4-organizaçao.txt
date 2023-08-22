@@ -1,0 +1,35 @@
+ORGANIZAÇAO
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+actions.js -> guarda as actions type
+
+    export const makeCake = () => { return { type: "MAKE_CAKE" } };
+    export const orderCake = () => { return { type: "ODER_CAKE" } };
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+reducers.js -> guarda o initial state e os seus reducers, que irão manipular o initial state baseado na action type
+
+    const initialState = { numCakes: 0 };
+
+    const cakeReducer = (state= initialState, action) => {
+        switch(action.type) {
+            case "MAKE_CAKE":
+                return {...state, numCakes: state.numCakes + 1};
+            case "ORDER_CAKE":
+                return {...state, numCakes: state.numCakes - 1};
+            default:
+                return state;
+        }
+    };
+
+    export deafault cakeReducer;
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+store.js -> cria, finalmente, o store, baseado na estrutura do initialState e na manipulaçao dos reducers
+
+    import { createStore } from 'redux';
+    import cakeReducer from './reducers'
+
+    const store = createStore(cakeReducer);

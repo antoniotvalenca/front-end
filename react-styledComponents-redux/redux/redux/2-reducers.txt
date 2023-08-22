@@ -1,0 +1,20 @@
+REDUCERS
+
+-> Especificam como o estado da aplicação muda em resposta às ações que são mandaram para o "Store"
+-> São funções que recebem como parâmetro um estado e uma ação como argumentos e retornam o próximo estado da aplicação (baseado na ação disparada)
+
+const initialState = {
+    numOfCakes: 10
+}
+
+const reducer = (state = initialState, action) => {
+    switch(action.type) {
+        case CAKE_ORDERED:
+            return {
+                ...state, // basicamente, aqui estou dizendo para fazer uma copia do initialState e mudar apenas o numOfCakes
+                numOfCakes: state.numOfCakes - 1
+            }
+        default:
+            return state
+    }
+}

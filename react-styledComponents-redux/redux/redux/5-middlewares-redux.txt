@@ -1,0 +1,27 @@
+MIDDLEWARE
+
+-> São funcionalidades aplicadas entre o dispatch de uma action e a atividade do seu respectivo reducer
+    -> podem performar console.logs, funçoes assincronas, etc
+    -> aplicamos o middleware ao declararmos o store
+    -> as funções seguem o modelo:
+
+        -> const funcaoQueÉExecutada = store => next => action => {
+        // Aqui você pode executar lógica antes de passar a ação para o próximo middleware ou o reducer.
+
+        // Por exemplo, você pode querer fazer algo antes de a ação continuar:
+        console.log('Antes de passar a ação para o próximo middleware ou reducer');
+
+        // Agora, você chama o próximo middleware ou reducer com a ação.
+        const result = next(action);
+
+        // Aqui você pode executar lógica depois que a ação foi processada pelo próximo middleware ou reducer.
+        console.log('Depois de a ação ser processada pelo próximo middleware ou reducer');
+
+        // Por fim, você retorna o resultado (geralmente o valor retornado por next(action)).
+        return result;
+        };
+
+        ->
+
+        const applyMiddleware = redux.applyMiddleware;
+        const store = createStore(reducer, applyMiddleware(funçaoQueéExecutada))

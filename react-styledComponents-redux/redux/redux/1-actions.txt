@@ -1,0 +1,13 @@
+ACTIONS
+-> Objeto que carregam uma informação para o redux store ( o que acabou de acontecer na aplicação )
+-> tem uma propriedade "type" que guarda uma string, o nome da ação que foi disparada
+-> Geralmente (ou seja, não sempre, já que não é necessário) criamos constantes com o nome da ação em sí, para evitar misspelling
+
+const CAKE_ORDERED = "CAKE_ORDERED";
+
+const orderCake() {
+    return {
+        type: CAKE_ORDERED,
+        quantity: 1 // podemos adicionar quantas propriedades quisermos
+    }
+}

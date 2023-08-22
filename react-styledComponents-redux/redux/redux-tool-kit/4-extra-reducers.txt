@@ -1,0 +1,21 @@
+EXTRA REDUCERS
+
+-> São reducers de uma entidade externa que interferem no valor daquele reducers específico
+-> EX: Toda vez que pedimos um sorvete, alteramos, também o numero de bolos (já que damos um de presente para o cliente)
+-> entenda:
+
+-> cakeSlice.js
+
+    const initialState = { numCakes: 10 };
+
+    const cakeSlice = createSlice({
+        name: 'cake',
+        initialState,
+        reducers: {
+            ordered: (state) => { state.numCakes-- },
+            restocked: (state, action) => { state.numCakes += action.payload}
+        },
+        extraReducers: {
+            ['icecream/ordered']: (state) => { state.numCakes-- } // name/action: funçao que manipula o que acontece quando um icream é ordered
+        }
+    })

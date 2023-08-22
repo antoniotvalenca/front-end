@@ -1,0 +1,53 @@
+REDUX
+
+-> De modo resumido, Redux é uma lib que guarda todos os estados de uma aplicação
+    -> sendo, portanto, um grande objeto que guarda tudo
+-> ele facilita a comunicação entre componentes, já que, muitos componentes são rseponsáveis pelo controle de estados específicos e outros precisam absorver o resultado
+desses resultados mas estão "distantes" daquele que controla o estado
+
+então:
+
+         [ REDUX ] - - - - - - - - - - - - - - - [COMPONENTES]
+* estado global da aplicação *              * controle do estado global*
+
+-> esse estado global pode guardar várias infos úteis de uma sessão de um usuário, como os itens que ele selecionou para o carrinho de compras ou, por exemplo, um route
+que ele está acessando no momento de uma single page application
+
+-> npm redux react-redux @reduxjs/toolkit
+-> palavras-chave => state container, javascript, predictable
+________________________________________________________________________________________________________________________________________________________________________________
+
+OS TRES PRINCIPIOS
+
+1) O ESTADO GLOBAL DA APLICAÇÃO É GUARDADO EM UM GRANDE OBJETO
+    -> Esse estado é manipulado pelo Redux, que envia as informações para este objeto
+
+2) O UNICO JEITO DE MUDAR UM ESTADO É DISPARANDO UMA AÇÃO
+    -> Ou seja, para atualizar o estado da aplicação, é preciso que o Redux saiba qual ação está sendo desparada para que ele manipule o grande objeto e, desta forma, reflita na
+    aplicação em sí
+    -> uma ação é representada como um objeto, que tem a chave "type" e o valor, que seria a ação:
+        ->  {
+                type: 'cake_ordered'          -> uma ação que representa que pediram um bolo na padaria, por exemplo
+            }
+
+3) PARA ESPECIFICAR COMO A "GRANDE ÁRVORE DE ESTADOS" É ATUALIZADA, VOCE TEM QUE ESCREVER REDUCERS
+    -> Reducer = (previousState, action) => newState
+    -> const reducer = (state = initialState, action) => {
+        switch (action.type) {
+            case CAKE_ORDERED:
+                return {
+                    numOfCakes: state.numOfCakes - 1;
+                }
+        }
+       }
+
+
+                                                APLICAÇÃO -> DISPARA AÇÃO -> REDUCER -> REDUX STORE -> APLICAÇÃO
+
+                                                                ______JAVASCRIPT APP_____
+                                                                |                       |
+                                                            REDUX STORE               ACTION
+                                                                |________REDUCER _______|
+
+
+________________________________________________________________________________________________________________________________________________________________________________

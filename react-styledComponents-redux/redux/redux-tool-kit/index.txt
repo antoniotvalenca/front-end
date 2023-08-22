@@ -1,0 +1,81 @@
+REDUX TOOLKIT
+
+-> É o toolset do redux numa versão mais simplificada e otimizada (menos boilerplate code, performance otimizada, etc)
+->  npm i @reduxjs/toolkit
+
+____________________________________________________________________________________________________________________________________
+
+ORGANIZAÇÃO
+
+-> app
+    -> store.js // contem o codigo relativo ao redux store
+
+-> features
+    -> cake // implementa as actions relacionados ao cake
+    -> icecream // implementa as actions relacionadas a icecream
+    -> cart
+
+____________________________________________________________________________________________________________________________________
+
+* AO USARMOS UM COMPONENTE REACT QUE VÁ INTERAGIR COM O REDUX, IMPORTAMOS O STORE E A FEATURE ESPECÍFICA QUE IRÁ MANIPULAR *
+
+1) Criar store
+    -> store.js
+    -> configureStore({})
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+2) Criar os Reducers, conhecidos como Slices
+    -> userSlice.js, por exemplo
+    -> createSlice({})
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+2.5) Incluir as Async Actions
+    -> dentro de extraReducers do createSlice
+    -> createAsyncThunk('sliceName/actionName', async () => { })
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+3) Permitir acesso global do store e reducers em todos os componentes React
+    -> index.js
+    -> import { Provider } from 'react-redux';
+       import store from './store';
+    -> <Provider store={store}>
+            <App />
+       </Provider>,
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+4) Acessar o store (estado da aplicação) nos componentes React
+    -> import { useSelector } from 'react-redux'
+    ->  const atributo = useSelector( (state) => state.nomeDaFeature.atributo )
+        -> nome da feature que esta registrado como chave no store.js, na parte de reducers. (ex: users, cake, etc...)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+5) Acessar as actions (ações que manipulam o store) nos componentes React
+    -> xSlice.js
+        ->  ...
+            reducers: { increment: (state) => state + 1, decrement: (state) => state - 1 }})
+            ...
+           export const { increment, decrement } = xSlice.actions; // exportando as actions
+
+    -> xComponent.js
+        ->
+        import { useDispatch, useSelector } from 'react-redux';
+        import { increment, decrement } from './xSlice.js'
+
+        const component = () => {
+            const dispatch = useDispatch();
+            const counter = useSelector( (state) => state.counter );
+
+            return (
+                ... <h1> Counter: {counter} </h1>
+                    <button onClick={() => dispatch(increment())}> Increment </button>
+                    <button onClick={() => dispatch(decrement())}> Decrement </button>
+                ...
+            )
+        }
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

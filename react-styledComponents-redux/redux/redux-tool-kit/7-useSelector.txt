@@ -1,0 +1,20 @@
+USESELECTOR
+
+-> é um hook do react-redux que acessa o estado global da aplicação
+    -> obs: este hook funciona através do <Provider> estudado no tópico anterior
+-> useSelector( (state) => { state.nomeDaFeature.propriedade })
+-> No componente react, importe ele do react-redux:
+
+____________________________________________________________________________________________________________________________________
+=================                                     ARQUIVO: USERCOMPONENT.JS                                    =================
+------------------------------------------------------------------------------------------------------------------------------------
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+const CakeComponent = () => {
+    const numOfCakes = useSelector( (state) => state.cake.numOfCakes)
+    return (
+        <div>
+            <h1> Number of Cakes - {numOfCakes} </h1>
+        </div>
+    )

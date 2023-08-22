@@ -1,0 +1,19 @@
+EVENT TRIGGER
+
+:hover -> mouse por cima
+:active -> click
+:focus -> quando um elemento recebe foco (tipo com o tab, que aumenta a borda etc)
+:first-child -> aplica a primeira tag filha daquela tag mae
+:nth-child(odd/even) -> aplica todos os efeitos de acordo com a posiçao do filho naquela tag mae (par ou impar)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+const Botao = styled.button`
+
+    * estilizaçao *
+
+ &:hover {
+
+    * o que acontece quando recebe o hover *
+ }
+`

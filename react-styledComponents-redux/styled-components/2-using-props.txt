@@ -1,0 +1,30 @@
+PROPS
+
+-> São os atributos e seus valores, passados dentro das tags
+-> dependendo de seus valores, é possível manipular o estilo dos componentes
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+REACT:
+
+const ComponenteReact = () => {
+    return (
+        <>
+            <Botao>Botao 1</Botao>
+            <Botao variante="com borda">Botao 2</Botao>
+        </>
+    )
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+STYLE:
+
+const Botao = styled.button`
+    border: ${ (props) => props.variante === 'com borda' ? 2px solid black : none}; // SE TIVER UM PROP COM ESSE VALOR, ENTAO O ESTILO SERÁ OUTRO
+    background: green;
+    color: white;
+`;
+
+

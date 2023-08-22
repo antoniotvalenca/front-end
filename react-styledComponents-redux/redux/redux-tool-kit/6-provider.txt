@@ -1,0 +1,19 @@
+PROVIDER
+-> É um componente importantíssimo fornecido pela lib 'react-redux' que conecta a store do Redux a toda aplicação react
+    -> isto é, permitindo que todos os componentes react acessem globalmente o store do Redux Toolkit
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+
+import App from './App';
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root');
+);
+

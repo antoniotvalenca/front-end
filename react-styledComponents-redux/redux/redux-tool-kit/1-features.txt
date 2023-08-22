@@ -1,0 +1,42 @@
+FEATURES
+
+-> São pedaços da lógica redux. Eles são chamados de xSlice.js (x = nome da feature)
+    -> ex:
+        -> cakeSlice.js (guarda a lógica do cake, incluindo suas actions: reducer() )
+        -> ao finalizarmos um slice, exportamos o seu xSlice.reducer (para o store)
+
+___________________________________________________________________________________________________________________________________________________________________
+
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+    products: []
+}
+
+const cartSlice = createSlice({
+    name: 'cart'  // nome do slice
+    initialState, // estado inicial dele
+    reducers: {   // seus reducers
+        addProduct: (state, action) => {
+
+                  // checando se o produto ja esta no carrinho
+            const productIsAlreadyInCart = state.products.some( (product) => product.id === action.payload.id);
+
+                  // se tiver, soma + 1 no seu valor
+            if (productIsAlreadyInCart) {
+                state.products = state.products.map( (product) => product.id === action.payload.id ? {...product, quantity: product.quantity + 1 }) : product );
+                return;s
+            }
+
+                // senao, adiciona ele
+
+            state.products = [ ...state.products, {...action.payload, quantity: 1} ]
+        }
+    }
+
+    removeProduct: (state, action) => {
+        state.products = state.products.filter( (product) => product.id !== action.payload )
+    }
+});
+
+module.exports = cakeSlice.reducer

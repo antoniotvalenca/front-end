@@ -1,0 +1,46 @@
+REACT
+
+1) npm i react
+    -> INSTALA A BIBLIOTECA DO REACT
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+2) npx create-react-app
+    -> INICIALIZA UM MODELO DE PROJETO REACT
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+https://react-icons.github.io/react-icons/
+3) npm i react-icons --save
+    -> BAIXA LIB QUE LIDA COM ICONES DE UI
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+https://mui.com/
+4) npm i @mui/material @emotion/react @emotion/styled
+    -> BAIXA AS DEPENDENCIAS DA LIB "MATERIAL USER INTERFACE" DO REACT
+    -> SÃO COMPONENTES DE ESTILO PRONTOS
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+5) npm i @mui/icons-material
+    -> ICONES QUE SEGUEM O SENSO ESTÉTICO DO MUI
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+6) npm i framer-motion
+    -> PARA EFEITOS DO REACT, TEM O FRAMER
+
+____________________________________________________________________________________________________________________________________
+
+STYLED COMPONENTS
+
+1) npm i styled-components
+
+____________________________________________________________________________________________________________________________________
+
+REDUX TOOLKIT
+
+1) react @reduxjs/toolkit react-redux
+
+

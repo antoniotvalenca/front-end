@@ -1,0 +1,30 @@
+STORE
+
+-> enquanto no redux normal usamos o createStore, no toolkit usamos configureStore para criar o store do estado
+
+import { configureStore } from '@reduxjs/toolkit'
+import cartReducer from '../../features/cartSlice.js'
+
+const store = configureStore({
+    reducer: {
+        cart: cartReducer, // guarda todos os reducers
+        ...
+    } 
+})
+
+module.exports = store;
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+AGORA NUM ARQUIVO .JS (EX: DO REACT)
+
+import { store } from '../../app/store.js'
+import { cartActions } from '../../features/cartSlice.js'
+
+console.log('initial state: ', store.getState())
+const unsubscribe = store.subscribe( () => { console.log('updated state ', store.getState()) } )
+
+store.dispatch(cartActions.addProduct(talProduto))
+...
+
+unsubscribe(); 

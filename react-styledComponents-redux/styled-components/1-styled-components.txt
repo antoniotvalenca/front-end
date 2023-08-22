@@ -1,0 +1,54 @@
+EXPLICAÇÃO
+
+-> O Styled Components é uma extensão/biblioteca do JAVASCRIPT que lida com estilização
+-> Ou seja, ao invés de criarmos um arquivo CSS, criamos um arquivo .js, importando a lib styled-components, e atribuimos os valores devidos
+-> Mas, ao criarmos um styled component, a tag que usaremos (no caso, o componente) será a criada no arquivo do styled em questão
+
+ex:
+
+Vamos no arquivo do styled-components e criamos um componente Title
+Agora, no arquivo componente react, importamos a tag/componente-estilizado e usamos
+
+-> npm i styled-components
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+(1) NO ARQUIVO DO STYLED-COMPONENTS
+
+import styled from 'styled-components' // IMPORTA A LIB
+
+const Title = styled.h1` // CRIA UM STYLED.<NOME DA TAG GERAL> E COLOCA A ESTILIZAÇAO DENTRO DE ``
+    color: #f00;
+    font-size: ${ props => `${props.fontSize}px` }; // OS PROPS SÃO OS ATRIBUTOS QUE SÃO USADOS NA TAG. EX: EXISTE UM ATRIBUTO FONTSIZE, SRC, HREF ...
+
+    span {
+        font-size: 12px; // TRATA-SE DA ESTILIZAÇAO DA SPAN QUE TIVER DENTRO DO COMPONENTE TITLE
+    }
+`;
+
+const TitleSmall = styled(Title)` // UMA TAG QUE HERDA OS ATRIBUTOS DE TITLE, ALÉM DAS MUDANÇAS ATRIBUIDAS DENTRO DELA MESMA
+    color: #00f;
+    font-size:16px
+`;
+
+export { Title, TitleSmall };
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+(2) NO ARQUIVO REACT COMPONENTS
+
+import React from 'react';
+import { Title, TitleSmall } from './arquivodostyledcomponents'
+
+const tal = () => {
+    return (
+        <div>
+            <Title fontSize='32px'>
+                Título tal.
+                <span> Span tal.</span>
+            </Title>
+            <TitleSmall>
+                Título pequeno tal.
+            </TitleSmall>
+        </div>
+    )
+}

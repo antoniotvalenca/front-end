@@ -1,0 +1,25 @@
+ATRIBUINDO ATRIBUTOS
+
+-> atributos, como: type:submit, por exemplo
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+CONSTRUINDO NO STYLED COMPONENTS
+
+const SubmitButton = styled.button.attrs({
+    type: 'submit',
+    disabled: false
+})`
+    background: ...;
+    color: ...;
+`
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+AGORA NO REACT COMPONENTS
+
+const forms = () => {
+    <>
+        <SubmitButton> clique aqui </SubmitButton> // todos os atributos já estão inseridos
+    </>
+}

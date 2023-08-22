@@ -1,0 +1,61 @@
+REDUX STORE
+-> É um grande "store" do estado da aplicação toda
+-> Responsabilidades
+    * Guarda o estado da aplicação
+    * Permite acesso para esse estado via           [  getState()           ]
+    * Permite que o estado seja atualizado via      [  dispatch( {type: action} )     ]
+    * Registra listeners de update via              [  subscribe(listener)  ]
+        -> ou seja, quando o estado da aplicação é atualizado, dispara o listener
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    import redux from 'redux';                                                  // const redux = require('redux');
+    const createStore = redux.createStore;
+    const bindActionCreators = redux.bindActionCreators;                        // para conectar todas as actions numa variavel dps
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    const CAKE_ORDERED = 'CAKE_ORDERED';                                        // nome da ação
+
+    const orderCake = () => {                                                   // função da ação
+        return {
+            type: CAKE_ORDERED,
+            quantity: 1,
+        }
+    }
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    const initialState = {                                                      // estado inicial (que será manipulado pela função da ação)
+        numOfCakes: 10
+    }
+
+    const reducer = (state = initialState, action) => {                         // o reducer que manipula o estado da aplicação
+        switch (action.type) {
+            case CAKE_ORDERED:
+                return {
+                    ...state,
+                    numOfCakes: state.numOfCakes - 1
+                }
+            default:
+                return state
+        }
+    }
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    const store = createStore(reducer);                                         // cria o store
+    console.log(`state: ${ store.getState() }`)                                 // printa o estado inicial da aplicação (já que não houve nenhuma disparada de ação)
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    const unsubscribe = store.subscribe(() => {console.log(`estado atualizado: ${ store.getState()}`)})
+
+    store.dispatch(orderCake())                                                 // usado o orderCake pq ele já retorna um objeto com o type
+    unsubscribe()                                                               // agora o store nao ira mais fazwr nada quando o estado for alterado
+
+    - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    const actions = bindActionCreators( {orderCake, makeCake }, store.dispatch)
+
+    actions.orderCake() // agora fica mais simples
+    actoins.makeCake() 
