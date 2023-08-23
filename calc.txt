@@ -1,0 +1,14 @@
+1) editar o index.html , mudando titulo, metatags, etc
+2) 
+    <wrapper>
+        <section class=screen>
+        </section>
+        <section class=calc-buttons>
+            <div class=calc-button-row>
+                <button class=calc-button double>C</button>
+                <button></button>
+                <button> </button>
+                <button> </button>
+            </div>
+        </section>
+    </wrapper>

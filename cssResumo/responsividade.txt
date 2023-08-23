@@ -26,10 +26,19 @@ Imagens
     -> um tamanho por responsividade OU width 100%
 
 Botões
-    -> 1. SMARTPHONES VERTICAIS / TABLETS VERTICAIS         ( width: 44-48px // heigth: 44-48px )
-    -> 2. SMARTPHONES HORIZONTAIS / TABLETS HORIZONTAIS     ( width: 48-64px // height: 44-46px )
-    -> 3. DESKTOP / TABLETS MAIORES HORIZONTAIS             ( width: 64-120px // height: 44-48px )
-    -> 4. DESKTOP MAIORES                                   ( width: 80-150px // heigth: 44-48px )
+    -> CALL TO ACTION (Try For Free / Register / Click to ...)
+    -> PRIMÁRIO (Mais frequentemente usados, ex: Empty Trash)
+    -> SECUNDÁRIO (Menos frequentemente usado, ex: Cancel)
+      -> 1. SMARTPHONES VERTICAIS / TABLETS VERTICAIS         ( width: 44-48px // heigth: 44-48px )
+      -> 2. SMARTPHONES HORIZONTAIS / TABLETS HORIZONTAIS     ( width: 48-64px // height: 44-46px )
+      -> 3. DESKTOP / TABLETS MAIORES HORIZONTAIS             ( width: 64-120px // height: 44-48px )
+      -> 4. DESKTOP MAIORES                                   ( width: 80-150px // heigth: 44-48px )
 
+    -> border                                               ( border-radius: 4-8px )
+
+Cores
+    -> #F5F5F5: Um off-white com um toque de cinza claro.
+    -> #F8F8F8: Outra opção de cinza claro com um toque de calor.
+    -> #FAFAFA: Um branco acinzentado que é um pouco mais escuro que o branco puro.
 Tipografia
     -> preferência por "em/rem" (para que se ajuste de acordo com o tamanho da tela)

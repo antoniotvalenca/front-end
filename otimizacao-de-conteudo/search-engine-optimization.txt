@@ -6,6 +6,7 @@
 
 1. Palavras-Chave
     -> Usar palavras estratégicas durante a construção do contéudo do site
+    -> ideal usar tais palavras-chave tanto no title quanto no meta description
 
 2. <title>
     -> Abaixo de 70 caracteres, e que seja bastante efetivo (com palavras-chave importantes)
