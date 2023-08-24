@@ -1,0 +1,42 @@
+CRIANDO UM APP COM REACT
+
+  -> PARA CRIAR UM PROJETO COM REACT
+
+      -> (TERMINAL) npx create-react-app .
+      -> cria um projeto do react com varias dependencias ja instaladas e com uma organização de pastas base (public, src . . .), além de alguns exemplos de arquivos (imagens,
+        fav icon ...)
+
+  -> PARA STARTAR O SERVIDOR
+
+      -> npm start (inicia o servidor do react, já que automaticamente inicia o script "react-scripts start", que está no package.json)
+
+________________________________________________________________________________________________________________________________________________________________________________
+
+CONFIGURAÇÕES/ORGANIZAÇÃO INICIAIS
+
+  -> SRC
+      -> App.js           // vai fazer a configuração de renderização de uma função App
+      -> Index.js         // vai reunir, de um jeito organizado, as funçoes a serem renderizadas e envia para o DOM
+      -> App.cs           // faz o estilo da função App
+
+  -> PUBLIC
+      -> Index.html       // o html que irá usar as configurações do react
+      -> robots (caso queira)
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+EDITORCONFIG E ESLINT (AMBIENTE DE CODIFICACAO)
+
+-> editorconfig é uma extensão do VS.CODE que ajuda a configurar algumas especificidades na hora de codar (identação, etc)
+-> ao baixar, basta clicar com o botao direito em cima do lugar onde ficam os arquivos do projeto e clicar em "Generate .editorconfig"
+
+-> eslint é uma ferramenta de análise estatística de código, muito popular entre desenvolvedores javascript.
+-> sua função é ajudar a identificar e corrigir problemas de código, seguir boas práticas e garantir consistência no estilo do código
+-> npm i eslint babel-eslint --save-dev + extensao do eslint
+    -> npm eslint --init
+        -> inicia o eslint no projeto e faz algumas perguntas sobre o tipo de coisa que voce quer que seja analisado
+-> caso alguma regra voce não queira que seja aplicada ao seu projeto por algum motivo (para nao deixar o codigo todo vermelho mesmo estando certo),
+voce pode copiar o nome da regra (passando o mouse por cima das linhas vermelhas, do que ta errado) e colar na parte de rules do arquivo eslint seguido de off ou 0
+    -> rules: {
+        "react/jsx-filename-extension": 0
+    }

@@ -1,0 +1,16 @@
+COMO FUNCIONA A RENDERIZAÇAO REACT vs. HTML
+
+-> Ao associarmos um conjunto de funções-componentes à um ElementId, todas as tags de todas as páginas HTML que tiverem aquele element id irão renderizar aquela associação
+
+ReactDOM.render(<Componente />, document.getElementId('root'))
+  -> todas as páginas HTML irão buscar por tags que tenham o seu id igual a root e, se tiverem, irão renderizar
+
+OU
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  <React.StrictMode>
+    <Componente />
+  </React.StrictMode>,
+);

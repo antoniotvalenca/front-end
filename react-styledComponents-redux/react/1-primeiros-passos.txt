@@ -1,0 +1,41 @@
+REACT
+
+-> É uma alternativa a frameworks como Angular, usado para construir interfaces de usuário interativas e reativas (web e mobile)
+    -> a sua sintaxe se chama JSX (JavaScript XML), onde a sua escrita é bastante parecida com o HTML e é em formato Javascript
+    -> para a construção de aplicativos móveis, existe o React Native (android e iOS)
+
+-> Ele trabalha em conjunto com o HTML
+    -> enquanto o HTML é a base da estrutura e do conteúdo de uma página web, o React é responsável pela criação e gerenciamento das interfaces
+    de usuário (UI) dinâmicas e interativas
+    -> isto é, o React identifica uma tag HTML e renderiza, nela, aquilo que quer
+
+-> Em suma, terá um arquivo HTML:
+    (...)
+    <div id="root"></div>
+    (...)
+
+-> e o arquivo React, que irá renderizar o que deveria estar na tag "div" com id "root":
+
+            import React from "react";
+            import ReactDOM from "react-dom";
+
+            const listadetarefas = () => {
+                const taregas = ['tarega 1', 'tarefa 2', 'tarefa 3']
+
+                return (
+                    <div>
+                        <h1> Lista de tarefas </h1>
+                        <ul>
+                            {tarefas.map((tarefa, index) => (
+                                <li key={index}> {tarefa} </li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            };
+
+            ReactDOM.render(<listadetarefas />, document.getElementByID('root'))
+
+-> e, deste modo, o codigo irá substituir a parte do div "root"
+
+-> obs: em React, para injetar o javascript no html basta usar chaves { }
